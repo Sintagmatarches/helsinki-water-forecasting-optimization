@@ -85,6 +85,8 @@ mypy src
 - [`artifacts/v1.0.0/`](artifacts/v1.0.0/) — machine-readable metrics, predictions, anomalies, scenarios and figures
 - [`src/helsinki_water/`](src/helsinki_water/) — acquisition, validation, models, uncertainty and optimization package
 
+Dependency versions are pinned. Local reruns are byte-stable; CI also performs a semantic artifact comparison because ETS optimization and font rendering can differ slightly across operating systems and BLAS implementations.
+
 ## What this project proves—and does not
 
 It demonstrates a leakage-safe monthly forecasting and decision pipeline on a bounded official Helsinki property panel. It shows that model choice can reverse on a sealed future period, high-demand errors are larger, nominal uncertainty can be too wide, and optimization has no automatic value when constraints do not bind.

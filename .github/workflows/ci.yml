@@ -21,7 +21,11 @@ jobs:
       - run: pytest
       - run: ruff check .
       - run: mypy src
+      - name: Preserve committed evidence for cross-platform comparison
+        run: cp -R artifacts/v1.0.0 "$RUNNER_TEMP/reference-v1.0.0"
       - run: python -m helsinki_water.cli run
       - run: python -m helsinki_water.cli report
-      - name: Verify committed experiment evidence is reproducible
-        run: git diff --exit-code -- artifacts/v1.0.0 data/processed
+      - name: Verify artifact semantics across numerical platforms
+        run: python -m helsinki_water.verification "$RUNNER_TEMP/reference-v1.0.0" artifacts/v1.0.0
+      - name: Verify curated data are unchanged
+        run: git diff --exit-code -- data/processed

@@ -159,7 +159,7 @@ This is a mixed method reproduction, not an exact replication or a universal ran
 - Deterministic seeds and declared candidate grid.
 - Automated validation and seven unit tests.
 - Ruff and strict mypy in CI.
-- GitHub Actions reruns metrics and figures and rejects evidence diffs.
+- GitHub Actions reruns metrics and figures, enforces exact artifact structure and identity fields, and checks numerical evidence within a narrow tolerance for cross-platform BLAS differences.
 - Versioned JSON, CSV and PNG outputs.
 - Raw responses, environments, caches and secrets excluded from git.
 - No credentials or manual access required.
