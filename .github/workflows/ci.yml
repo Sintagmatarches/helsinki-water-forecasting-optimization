@@ -26,7 +26,7 @@ jobs:
       - run: python -m helsinki_water.cli run
       - run: python -m helsinki_water.cli report
       # ETS optimizers vary slightly across BLAS/OS builds; identities remain exact and
-      # numeric evidence must stay within the declared 2% / 0.25 m3 tolerance.
+      # numeric evidence must stay within the declared 5% / 0.5 m3 tolerance.
       - name: Verify artifact semantics across numerical platforms
         run: python -m helsinki_water.verification "$RUNNER_TEMP/reference-v1.0.0" artifacts/v1.0.0
       - name: Verify curated data are unchanged
