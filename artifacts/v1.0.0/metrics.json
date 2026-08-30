@@ -1,0 +1,702 @@
+{
+  "experimentVersion": "v1.0.0",
+  "seed": 20260830,
+  "dataValidation": {
+    "rows": 864,
+    "properties": 8,
+    "monthsPerProperty": 108,
+    "startMonth": "2010-01",
+    "endMonth": "2018-12"
+  },
+  "validationDesign": {
+    "developmentOrigins": [
+      "2015-12",
+      "2016-03",
+      "2016-06",
+      "2016-09",
+      "2016-12",
+      "2017-03",
+      "2017-06"
+    ],
+    "developmentHorizonMonths": 6,
+    "finalOrigin": "2017-12",
+    "finalHorizonMonths": 12,
+    "modelSelectionRule": "Lowest pooled property-level development MASE, then MAE, then model name; final 2018 is excluded from selection."
+  },
+  "developmentMetrics": [
+    {
+      "split": "development",
+      "model": "ets",
+      "observations": 336,
+      "mae_m3": 32.689350137659574,
+      "rmse_m3": 53.175992779721916,
+      "smape": 0.35930178487336284,
+      "mase": 1.0988089002667452
+    },
+    {
+      "split": "development",
+      "model": "harmonic_ridge",
+      "observations": 336,
+      "mae_m3": 42.024015180497244,
+      "rmse_m3": 62.235261364708144,
+      "smape": 0.3916747325348797,
+      "mase": 1.3924079634707287
+    },
+    {
+      "split": "development",
+      "model": "sarima_paper",
+      "observations": 336,
+      "mae_m3": 37.092832425902614,
+      "rmse_m3": 57.908573826595024,
+      "smape": 0.37321816200527286,
+      "mase": 1.2185225812468157
+    },
+    {
+      "split": "development",
+      "model": "seasonal_naive",
+      "observations": 336,
+      "mae_m3": 42.75595238095238,
+      "rmse_m3": 66.0508912740414,
+      "smape": 0.39618121935571227,
+      "mase": 1.3934303176659077
+    }
+  ],
+  "allSplitMetrics": [
+    {
+      "split": "development",
+      "model": "ets",
+      "observations": 378,
+      "mae_m3": 43.430235919891345,
+      "rmse_m3": 74.97345425791859,
+      "smape": 0.33595322259098775,
+      "mase": 1.100058446961472
+    },
+    {
+      "split": "development",
+      "model": "harmonic_ridge",
+      "observations": 378,
+      "mae_m3": 54.6441778437335,
+      "rmse_m3": 86.79031658021991,
+      "smape": 0.3659191644323904,
+      "mase": 1.3875133955698342
+    },
+    {
+      "split": "development",
+      "model": "sarima_paper",
+      "observations": 378,
+      "mae_m3": 46.131721570270514,
+      "rmse_m3": 74.49063111925479,
+      "smape": 0.34624300322798807,
+      "mase": 1.1966241533474522
+    },
+    {
+      "split": "development",
+      "model": "seasonal_naive",
+      "observations": 378,
+      "mae_m3": 52.576719576719576,
+      "rmse_m3": 82.44359944802926,
+      "smape": 0.3668815993432077,
+      "mase": 1.3655783807979456
+    },
+    {
+      "split": "final",
+      "model": "ets",
+      "observations": 108,
+      "mae_m3": 29.152732944976748,
+      "rmse_m3": 41.31240288354683,
+      "smape": 0.2287696032793025,
+      "mase": 0.7852809496246437
+    },
+    {
+      "split": "final",
+      "model": "harmonic_ridge",
+      "observations": 108,
+      "mae_m3": 33.179330102923366,
+      "rmse_m3": 49.10516164359154,
+      "smape": 0.2522551456311251,
+      "mase": 0.8645205082822741
+    },
+    {
+      "split": "final",
+      "model": "sarima_paper",
+      "observations": 108,
+      "mae_m3": 28.875595315833337,
+      "rmse_m3": 45.47226417074865,
+      "smape": 0.21867195099310285,
+      "mase": 0.7291058674541121
+    },
+    {
+      "split": "final",
+      "model": "seasonal_naive",
+      "observations": 108,
+      "mae_m3": 33.18518518518518,
+      "rmse_m3": 57.11619086790767,
+      "smape": 0.22209701773325297,
+      "mase": 0.8721931740869037
+    }
+  ],
+  "finalMetrics": [
+    {
+      "split": "final",
+      "model": "ets",
+      "observations": 108,
+      "mae_m3": 29.152732944976748,
+      "rmse_m3": 41.31240288354683,
+      "smape": 0.2287696032793025,
+      "mase": 0.7852809496246437
+    },
+    {
+      "split": "final",
+      "model": "harmonic_ridge",
+      "observations": 108,
+      "mae_m3": 33.179330102923366,
+      "rmse_m3": 49.10516164359154,
+      "smape": 0.2522551456311251,
+      "mase": 0.8645205082822741
+    },
+    {
+      "split": "final",
+      "model": "sarima_paper",
+      "observations": 108,
+      "mae_m3": 28.875595315833337,
+      "rmse_m3": 45.47226417074865,
+      "smape": 0.21867195099310285,
+      "mase": 0.7291058674541121
+    },
+    {
+      "split": "final",
+      "model": "seasonal_naive",
+      "observations": 108,
+      "mae_m3": 33.18518518518518,
+      "rmse_m3": 57.11619086790767,
+      "smape": 0.22209701773325297,
+      "mase": 0.8721931740869037
+    }
+  ],
+  "finalPropertyMetrics": [
+    {
+      "split": "final",
+      "model": "ets",
+      "observations": 96,
+      "mae_m3": 24.517975397465847,
+      "rmse_m3": 32.61719588859881,
+      "smape": 0.24929523716038982,
+      "mase": 0.8120130352635117
+    },
+    {
+      "split": "final",
+      "model": "harmonic_ridge",
+      "observations": 96,
+      "mae_m3": 27.743514912195366,
+      "rmse_m3": 39.09687667120534,
+      "smape": 0.2739028100155995,
+      "mase": 0.8899036241900062
+    },
+    {
+      "split": "final",
+      "model": "sarima_paper",
+      "observations": 96,
+      "mae_m3": 22.525425108972755,
+      "rmse_m3": 31.831232071311955,
+      "smape": 0.23660452967052223,
+      "mase": 0.7343147615070205
+    },
+    {
+      "split": "final",
+      "model": "seasonal_naive",
+      "observations": 96,
+      "mae_m3": 26.6875,
+      "rmse_m3": 45.17719741934715,
+      "smape": 0.23992402233919805,
+      "mase": 0.8893674851863039
+    }
+  ],
+  "finalAggregateMetrics": [
+    {
+      "split": "final",
+      "model": "ets",
+      "observations": 12,
+      "mae_m3": 66.23079332506397,
+      "rmse_m3": 82.76098082448382,
+      "smape": 0.06456453223060422,
+      "mase": 0.5714242645136991
+    },
+    {
+      "split": "final",
+      "model": "harmonic_ridge",
+      "observations": 12,
+      "mae_m3": 76.66585162874732,
+      "rmse_m3": 97.3310124104428,
+      "smape": 0.07907383055532947,
+      "mase": 0.6614555810204165
+    },
+    {
+      "split": "final",
+      "model": "sarima_paper",
+      "observations": 12,
+      "mae_m3": 79.676956970718,
+      "rmse_m3": 102.48767046775633,
+      "smape": 0.07521132157374762,
+      "mase": 0.6874347150308456
+    },
+    {
+      "split": "final",
+      "model": "seasonal_naive",
+      "observations": 12,
+      "mae_m3": 85.16666666666667,
+      "rmse_m3": 114.15997547301768,
+      "smape": 0.07948098088569246,
+      "mase": 0.7347986852917009
+    }
+  ],
+  "selectedModel": "ets",
+  "uncertainty": {
+    "method": "90% pooled scale-normalized expanding-backtest conformal intervals, calibrated by horizon bucket",
+    "alpha": 0.1,
+    "quantilesByHorizon": {
+      "h1": 1.9560832420395615,
+      "h2-3": 2.952097419162971,
+      "h4-6": 2.733442812786802,
+      "h7-12": 2.952097419162971
+    },
+    "propertyPanelFinal": {
+      "coverage": 0.9895833333333334,
+      "meanWidthM3": 167.31232103513798,
+      "byHorizon": [
+        {
+          "horizon_bucket": "h1",
+          "coverage": 1.0,
+          "mean_width_m3": 122.27848933273496,
+          "observations": 8
+        },
+        {
+          "horizon_bucket": "h2-3",
+          "coverage": 0.9375,
+          "mean_width_m3": 181.93381631904998,
+          "observations": 16
+        },
+        {
+          "horizon_bucket": "h4-6",
+          "coverage": 1.0,
+          "mean_width_m3": 158.5754651635545,
+          "observations": 24
+        },
+        {
+          "horizon_bucket": "h7-12",
+          "coverage": 1.0,
+          "mean_width_m3": 174.31255582669291,
+          "observations": 48
+        }
+      ],
+      "bySeason": [
+        {
+          "season": "shoulder",
+          "coverage": 0.9791666666666666,
+          "mean_width_m3": 179.98506073806755,
+          "observations": 48
+        },
+        {
+          "season": "summer",
+          "coverage": 1.0,
+          "mean_width_m3": 149.16503177190353,
+          "observations": 24
+        },
+        {
+          "season": "winter",
+          "coverage": 1.0,
+          "mean_width_m3": 160.11413089251337,
+          "observations": 24
+        }
+      ]
+    },
+    "aggregateFinal": {
+      "coverage": 1.0,
+      "meanWidthM3": 652.4122775875784,
+      "byHorizon": [
+        {
+          "horizon_bucket": "h1",
+          "coverage": 1.0,
+          "mean_width_m3": 453.43872486898033,
+          "observations": 1
+        },
+        {
+          "horizon_bucket": "h2-3",
+          "coverage": 1.0,
+          "mean_width_m3": 684.3242969754925,
+          "observations": 2
+        },
+        {
+          "horizon_bucket": "h4-6",
+          "coverage": 1.0,
+          "mean_width_m3": 633.6380767926739,
+          "observations": 3
+        },
+        {
+          "horizon_bucket": "h7-12",
+          "coverage": 1.0,
+          "mean_width_m3": 684.3242969754924,
+          "observations": 6
+        }
+      ],
+      "bySeason": [
+        {
+          "season": "shoulder",
+          "coverage": 1.0,
+          "mean_width_m3": 667.4288902478862,
+          "observations": 6
+        },
+        {
+          "season": "summer",
+          "coverage": 1.0,
+          "mean_width_m3": 667.4288902478863,
+          "observations": 3
+        },
+        {
+          "season": "winter",
+          "coverage": 1.0,
+          "mean_width_m3": 607.3624396066551,
+          "observations": 3
+        }
+      ]
+    },
+    "byHighDemand": [
+      {
+        "high_demand": false,
+        "observations": 88,
+        "empirical_coverage": 0.9886363636363636,
+        "mean_width_m3": 164.3655631005529
+      },
+      {
+        "high_demand": true,
+        "observations": 8,
+        "empirical_coverage": 1.0,
+        "mean_width_m3": 199.72665831557413
+      }
+    ]
+  },
+  "errorAnalysis": {
+    "bySeason": [
+      {
+        "season": "shoulder",
+        "observations": 48,
+        "mae_m3": 25.643982713578584
+      },
+      {
+        "season": "summer",
+        "observations": 24,
+        "mae_m3": 26.38282897135159
+      },
+      {
+        "season": "winter",
+        "observations": 24,
+        "mae_m3": 20.401107191354615
+      }
+    ],
+    "byHighDemand": [
+      {
+        "high_demand": false,
+        "observations": 88,
+        "mae_m3": 22.831794864173354
+      },
+      {
+        "high_demand": true,
+        "observations": 8,
+        "mae_m3": 43.06596126368324
+      }
+    ]
+  },
+  "residualDiagnostics": {
+    "jarqueBeraStatistic": 679.837478227656,
+    "jarqueBeraPValue": 2.3722874282775987e-148,
+    "ljungBoxLag6Statistic": 229.03120925723468,
+    "ljungBoxLag6PValue": 1.232504968661575e-46,
+    "interpretation": "Small p-values reject the corresponding idealized residual assumption; diagnostics are reported, not used to hide a model failure."
+  },
+  "anomalyLayer": {
+    "definition": "Observed monthly use above the one-step 90% conformal upper bound; this is a statistical anomaly and possible operational review signal, not a confirmed leak.",
+    "candidateCount": 3,
+    "observedExcessM3": 217.377730584063
+  },
+  "optimization": {
+    "candidateCount": 3,
+    "assumptions": {
+      "budget_hours": 12.0,
+      "false_positive_cost": 50.0,
+      "missed_m3_cost": 3.0,
+      "labor_hour_cost": 45.0,
+      "persistence_months": 3,
+      "zone_activation_hours": 1.0,
+      "monthly_capacity": 2,
+      "max_per_site": 2,
+      "interval_multiplier": 1.0
+    },
+    "baseline": {
+      "policy": "highest standardized residual first",
+      "selectedCount": 3,
+      "selectedCandidateIds": [
+        "1507 Suutarilan ala-asteen koulu, Päiväkoti Seulanen, Suutarilan monitoimitalo|2018-06",
+        "4521 Tammisalon korttelitalo/Lpk Tammisalo/koulu|2018-07",
+        "4303 Kontulan ala-asteen koulu|2018-05"
+      ],
+      "technicianHours": 8.13,
+      "activatedZones": 2,
+      "expectedDecisionValue": 983.4928607750608,
+      "capturedObservedExcessM3": 217.377730584063
+    },
+    "optimized": {
+      "policy": "CP-SAT expected-value policy",
+      "selectedCount": 3,
+      "selectedCandidateIds": [
+        "4303 Kontulan ala-asteen koulu|2018-05",
+        "1507 Suutarilan ala-asteen koulu, Päiväkoti Seulanen, Suutarilan monitoimitalo|2018-06",
+        "4521 Tammisalon korttelitalo/Lpk Tammisalo/koulu|2018-07"
+      ],
+      "technicianHours": 8.13,
+      "activatedZones": 2,
+      "expectedDecisionValue": 983.4928607750606,
+      "capturedObservedExcessM3": 217.377730584063
+    },
+    "improvementPct": 0.0
+  },
+  "sensitivity": [
+    {
+      "scenario": "base",
+      "candidateCount": 3,
+      "improvementPct": 0.0,
+      "baselineValue": 983.4928607750608,
+      "optimizedValue": 983.4928607750606,
+      "baselineExcessM3": 217.377730584063,
+      "optimizedExcessM3": 217.377730584063
+    },
+    {
+      "scenario": "budget_hours=4",
+      "candidateCount": 3,
+      "improvementPct": 0.0,
+      "baselineValue": 473.5807662936794,
+      "optimizedValue": 473.5807662936794,
+      "baselineExcessM3": 88.14529871017473,
+      "optimizedExcessM3": 88.14529871017473
+    },
+    {
+      "scenario": "budget_hours=8",
+      "candidateCount": 3,
+      "improvementPct": 0.0,
+      "baselineValue": 785.2792194403319,
+      "optimizedValue": 785.2792194403319,
+      "baselineExcessM3": 147.17469917634546,
+      "optimizedExcessM3": 147.17469917634546
+    },
+    {
+      "scenario": "budget_hours=20",
+      "candidateCount": 3,
+      "improvementPct": 0.0,
+      "baselineValue": 983.4928607750608,
+      "optimizedValue": 983.4928607750606,
+      "baselineExcessM3": 217.377730584063,
+      "optimizedExcessM3": 217.377730584063
+    },
+    {
+      "scenario": "false_positive_cost=0",
+      "candidateCount": 3,
+      "improvementPct": 0.0,
+      "baselineValue": 1033.4928607750608,
+      "optimizedValue": 1033.4928607750608,
+      "baselineExcessM3": 217.377730584063,
+      "optimizedExcessM3": 217.377730584063
+    },
+    {
+      "scenario": "false_positive_cost=150",
+      "candidateCount": 3,
+      "improvementPct": 0.0,
+      "baselineValue": 883.4928607750608,
+      "optimizedValue": 883.4928607750606,
+      "baselineExcessM3": 217.377730584063,
+      "optimizedExcessM3": 217.377730584063
+    },
+    {
+      "scenario": "missed_m3_cost=1",
+      "candidateCount": 3,
+      "improvementPct": 11.207703076674,
+      "baselineValue": 110.59762025835357,
+      "optimizedValue": 122.99307314677729,
+      "baselineExcessM3": 217.377730584063,
+      "optimizedExcessM3": 147.17469917634546
+    },
+    {
+      "scenario": "missed_m3_cost=10",
+      "candidateCount": 3,
+      "improvementPct": 0.0,
+      "baselineValue": 4038.626202583536,
+      "optimizedValue": 4038.626202583536,
+      "baselineExcessM3": 217.377730584063,
+      "optimizedExcessM3": 217.377730584063
+    },
+    {
+      "scenario": "interval_multiplier=0.75",
+      "candidateCount": 5,
+      "improvementPct": 0.0,
+      "baselineValue": 1125.6257216298154,
+      "optimizedValue": 1125.6257216298154,
+      "baselineExcessM3": 278.718366329564,
+      "optimizedExcessM3": 278.718366329564
+    },
+    {
+      "scenario": "interval_multiplier=1.5",
+      "candidateCount": 0,
+      "improvementPct": 0.0,
+      "baselineValue": 0.0,
+      "optimizedValue": 0.0,
+      "baselineExcessM3": 0.0,
+      "optimizedExcessM3": 0.0
+    },
+    {
+      "scenario": "persistence_months=1",
+      "candidateCount": 3,
+      "improvementPct": 11.207703076674,
+      "baselineValue": 110.59762025835357,
+      "optimizedValue": 122.99307314677729,
+      "baselineExcessM3": 217.377730584063,
+      "optimizedExcessM3": 147.17469917634546
+    },
+    {
+      "scenario": "persistence_months=6",
+      "candidateCount": 3,
+      "improvementPct": 0.0,
+      "baselineValue": 2292.835721550121,
+      "optimizedValue": 2292.835721550121,
+      "baselineExcessM3": 217.377730584063,
+      "optimizedExcessM3": 217.377730584063
+    },
+    {
+      "scenario": "zone_activation_hours=0.5",
+      "candidateCount": 3,
+      "improvementPct": 0.0,
+      "baselineValue": 983.4928607750608,
+      "optimizedValue": 983.4928607750606,
+      "baselineExcessM3": 217.377730584063,
+      "optimizedExcessM3": 217.377730584063
+    },
+    {
+      "scenario": "zone_activation_hours=2",
+      "candidateCount": 3,
+      "improvementPct": 0.0,
+      "baselineValue": 983.4928607750608,
+      "optimizedValue": 983.4928607750606,
+      "baselineExcessM3": 217.377730584063,
+      "optimizedExcessM3": 217.377730584063
+    }
+  ],
+  "paperReproduction": {
+    "paper": {
+      "citation": "Ristow, Henning & Kalbusch (2021), Models for forecasting water demand using time series analysis: a case study in Southern Brazil",
+      "doi": "10.2166/washdev.2021.208",
+      "method": "AIC-selected seasonal ARIMA compared with additive ETS on monthly consumption"
+    },
+    "adaptation": "Independent Python implementation; Helsinki public-property panel rather than Joinville category totals; expanding validation plus a sealed 2018 horizon rather than one fitted 2013-2017 series per category.",
+    "aggregateMetrics": [
+      {
+        "split": "final",
+        "model": "ets",
+        "observations": 6,
+        "mae_m3": 68.123358206165,
+        "rmse_m3": 88.85580072913505,
+        "smape": 0.06630245735324863,
+        "mase": 0.5877528850983833
+      },
+      {
+        "split": "final",
+        "model": "sarima_paper",
+        "observations": 6,
+        "mae_m3": 84.87538309258137,
+        "rmse_m3": 114.63986998378009,
+        "smape": 0.07522763285364113,
+        "mase": 0.7322855566738738
+      }
+    ],
+    "propertyPanelMetrics": [
+      {
+        "split": "final",
+        "model": "ets",
+        "observations": 48,
+        "mae_m3": 24.219712505024162,
+        "rmse_m3": 33.751401959840656,
+        "smape": 0.19910562990901484,
+        "mase": 0.7853661852298687
+      },
+      {
+        "split": "final",
+        "model": "sarima_paper",
+        "observations": 48,
+        "mae_m3": 22.166171003862697,
+        "rmse_m3": 31.08722151566121,
+        "smape": 0.196914337338987,
+        "mase": 0.707767611288895
+      }
+    ],
+    "siteResults": [
+      {
+        "site": "1507 Suutarilan ala-asteen koulu, Päiväkoti Seulanen, Suutarilan monitoimitalo",
+        "etsMaeM3": 60.32996431024005,
+        "sarimaMaeM3": 40.94752060950898,
+        "winner": "sarima_paper"
+      },
+      {
+        "site": "2183 Latokartanon peruskoulu",
+        "etsMaeM3": 11.233029243629447,
+        "sarimaMaeM3": 11.743957699508366,
+        "winner": "ets"
+      },
+      {
+        "site": "4022 Taivallahden peruskoulu",
+        "etsMaeM3": 23.429370091627675,
+        "sarimaMaeM3": 28.473608382997508,
+        "winner": "ets"
+      },
+      {
+        "site": "4236 Itäkeskuksen peruskoulu",
+        "etsMaeM3": 11.431863988350543,
+        "sarimaMaeM3": 13.536198026636733,
+        "winner": "ets"
+      },
+      {
+        "site": "4303 Kontulan ala-asteen koulu",
+        "etsMaeM3": 43.99003557430742,
+        "sarimaMaeM3": 45.29435741085816,
+        "winner": "ets"
+      },
+      {
+        "site": "4320 Crusellin peruskoulu",
+        "etsMaeM3": 5.848312733887769,
+        "sarimaMaeM3": 4.924242821669757,
+        "winner": "sarima_paper"
+      },
+      {
+        "site": "4513 Aurinkolahden peruskoulu",
+        "etsMaeM3": 15.895460438704852,
+        "sarimaMaeM3": 14.80786315007896,
+        "winner": "sarima_paper"
+      },
+      {
+        "site": "4521 Tammisalon korttelitalo/Lpk Tammisalo/koulu",
+        "etsMaeM3": 21.599663659445568,
+        "sarimaMaeM3": 17.601619929643118,
+        "winner": "sarima_paper"
+      },
+      {
+        "site": "PORTFOLIO_TOTAL",
+        "etsMaeM3": 68.123358206165,
+        "sarimaMaeM3": 84.87538309258137,
+        "winner": "ets"
+      }
+    ],
+    "sarimaWins": 4,
+    "etsWins": 5
+  },
+  "negativeResults": [
+    "The development-selected ETS model was retained even though paper-derived SARIMA achieved lower pooled property MASE on the sealed 2018 holdout.",
+    "Nominal 90% property-level intervals achieved 98.96% coverage and were over-conservative rather than well calibrated.",
+    "Development ETS residuals rejected both normality and no-autocorrelation diagnostics; conformal intervals reduce distributional dependence but do not remove temporal-dependence limitations.",
+    "The optimized policy improved expected decision value by 0.00% in the base scenario; its best tested one-factor improvement was 11.21%, so optimization value disappears when the candidate set is tiny or constraints are non-binding.",
+    "There are no confirmed leak labels; anomaly findings cannot establish detector precision, recall, or real leak occurrence."
+  ]
+}

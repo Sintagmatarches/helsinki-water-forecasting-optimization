@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "helsinki-water"
+version = "1.0.0"
+description = "Evidence-backed monthly water-use forecasting, uncertainty, anomaly triage and inspection optimization for Helsinki public properties"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+  "matplotlib>=3.9,<4",
+  "numpy>=2.0,<3",
+  "ortools>=9.12,<10",
+  "pandas>=2.2,<3",
+  "scikit-learn>=1.5,<2",
+  "scipy>=1.14,<2",
+  "statsmodels>=0.14,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "mypy>=1.13,<2",
+  "pandas-stubs>=2.2",
+  "pytest>=8.3,<9",
+  "ruff>=0.9,<1",
+]
+
+[project.scripts]
+helsinki-water = "helsinki_water.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["helsinki_water"]
+ignore_missing_imports = true

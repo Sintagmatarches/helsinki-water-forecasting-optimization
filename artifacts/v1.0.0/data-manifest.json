@@ -1,0 +1,37 @@
+{
+  "datasetVersion": "nuuka-helsinki-school-water-monthly-v1",
+  "acquiredAt": "2026-08-30T19:19:22.937351+00:00",
+  "source": "City of Helsinki Nuuka Open API via Helsinki Region Infoshare",
+  "sourceDatasetUrl": "https://hri.fi/data/en_GB/dataset/helsingin-kaupungin-palvelukiinteistojen-energiankulutustietoja",
+  "apiRoot": "https://helsinki-openapi.nuuka.cloud/api/v1.0",
+  "license": "Creative Commons Attribution 4.0",
+  "sourcePeriod": {
+    "start": "2010-01",
+    "end": "2018-12"
+  },
+  "selection": {
+    "search": "koulu",
+    "reportingGroup": "Water",
+    "frequency": "Monthly",
+    "properties": [
+      "4303 Kontulan ala-asteen koulu",
+      "4320 Crusellin peruskoulu",
+      "4236 Itäkeskuksen peruskoulu",
+      "4022 Taivallahden peruskoulu",
+      "4521 Tammisalon korttelitalo/Lpk Tammisalo/koulu",
+      "2183 Latokartanon peruskoulu",
+      "4513 Aurinkolahden peruskoulu",
+      "1507 Suutarilan ala-asteen koulu, Päiväkoti Seulanen, Suutarilan monitoimitalo"
+    ]
+  },
+  "rawSha256": {
+    "consumption": "85b080e59fe0e71be650260efc8d876c9c8ad046d24921f888cd9d91b0431860",
+    "properties": "4f69f9e7f3b1b2dfce5bb07c06701bf21352d3e795056b79e4b680424c21ef8d"
+  },
+  "processedSha256": {
+    "waterMonthly": "6ffdd28973769ea28dbdcaea262193d427577fab1dbc74388c04bd6021e99731",
+    "properties": "232bd70080a502a504c854fdbd57ac08ddb8cd89553ab989b5fbd92d0d37b823"
+  },
+  "rows": 864,
+  "propertyCount": 8
+}
