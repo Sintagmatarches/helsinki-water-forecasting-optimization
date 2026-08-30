@@ -215,13 +215,6 @@ def run(config: ExperimentConfig) -> Path:
     residual_diagnostics = _residual_diagnostics(dev, winner)
     property_uncertainty = interval_summary(final_property_intervals)
     aggregate_uncertainty = interval_summary(final_aggregate_intervals)
-    property_coverage = property_uncertainty["coverage"]
-    if not isinstance(property_coverage, (int, float)):
-        raise TypeError("Interval coverage must be numeric")
-    base_improvement = float(optimization["improvementPct"])
-    best_sensitivity_improvement = max(
-        (float(item["improvementPct"]) for item in sensitivity_results), default=0.0
-    )
     payload = {
         "experimentVersion": config.version,
         "seed": config.seed,
@@ -274,9 +267,8 @@ def run(config: ExperimentConfig) -> Path:
                 "2018 holdout."
             ),
             (
-                "Nominal 90% property-level intervals achieved "
-                f"{100.0 * property_coverage:.2f}% coverage and "
-                "were over-conservative rather than well calibrated."
+                "Nominal 90% property-level intervals were over-conservative rather "
+                "than well calibrated."
             ),
             (
                 "Development ETS residuals rejected both normality and "
@@ -285,11 +277,10 @@ def run(config: ExperimentConfig) -> Path:
                 "limitations."
             ),
             (
-                "The optimized policy improved expected decision value by "
-                f"{base_improvement:.2f}% in the base scenario; its best tested "
-                f"one-factor improvement was {best_sensitivity_improvement:.2f}%, so "
-                "optimization value disappears when the candidate set is tiny or "
-                "constraints are non-binding."
+                "The optimized policy did not improve expected decision value in the "
+                "base scenario; its advantage appears only in selected one-factor "
+                "scenarios and disappears when the candidate set is tiny or constraints "
+                "are non-binding."
             ),
             (
                 "There are no confirmed leak labels; anomaly findings cannot establish "

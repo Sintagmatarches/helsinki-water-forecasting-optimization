@@ -694,9 +694,9 @@
   },
   "negativeResults": [
     "The development-selected ETS model was retained even though paper-derived SARIMA achieved lower pooled property MASE on the sealed 2018 holdout.",
-    "Nominal 90% property-level intervals achieved 98.96% coverage and were over-conservative rather than well calibrated.",
+    "Nominal 90% property-level intervals were over-conservative rather than well calibrated.",
     "Development ETS residuals rejected both normality and no-autocorrelation diagnostics; conformal intervals reduce distributional dependence but do not remove temporal-dependence limitations.",
-    "The optimized policy improved expected decision value by 0.00% in the base scenario; its best tested one-factor improvement was 11.21%, so optimization value disappears when the candidate set is tiny or constraints are non-binding.",
+    "The optimized policy did not improve expected decision value in the base scenario; its advantage appears only in selected one-factor scenarios and disappears when the candidate set is tiny or constraints are non-binding.",
     "There are no confirmed leak labels; anomaly findings cannot establish detector precision, recall, or real leak occurrence."
   ]
 }

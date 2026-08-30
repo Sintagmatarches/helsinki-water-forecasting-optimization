@@ -85,7 +85,7 @@ mypy src
 - [`artifacts/v1.0.0/`](artifacts/v1.0.0/) — machine-readable metrics, predictions, anomalies, scenarios and figures
 - [`src/helsinki_water/`](src/helsinki_water/) — acquisition, validation, models, uncertainty and optimization package
 
-Dependency versions are pinned. Local reruns are byte-stable; CI also performs a semantic artifact comparison because ETS optimization and font rendering can differ slightly across operating systems and BLAS implementations.
+Dependency versions are pinned. Local reruns are byte-stable; CI also performs a semantic artifact comparison with exact identities and a declared 2% / 0.25 m³ numeric tolerance because ETS optimization and font rendering can differ slightly across operating systems and BLAS implementations.
 
 ## What this project proves—and does not
 

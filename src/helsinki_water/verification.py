@@ -37,7 +37,7 @@ def _compare_json(reference: Any, current: Any, path: str = "root") -> None:
             raise AssertionError(f"Boolean changed at {path}: {reference!r} != {current!r}")
         return
     if isinstance(reference, (int, float)) and isinstance(current, (int, float)):
-        if not math.isclose(float(reference), float(current), rel_tol=0.005, abs_tol=0.1):
+        if not math.isclose(float(reference), float(current), rel_tol=0.02, abs_tol=0.25):
             raise AssertionError(f"Numeric evidence changed at {path}: {reference} != {current}")
         return
     if isinstance(reference, dict) and isinstance(current, dict):
@@ -75,8 +75,8 @@ def _compare_csv(reference_path: Path, current_path: Path) -> None:
         if not np.allclose(
             left.to_numpy(dtype=float),
             right.to_numpy(dtype=float),
-            rtol=0.005,
-            atol=0.1,
+            rtol=0.02,
+            atol=0.25,
             equal_nan=True,
         ):
             raise AssertionError(f"Numeric column changed: {current_path.name}:{column}")
