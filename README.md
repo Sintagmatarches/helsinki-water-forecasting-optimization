@@ -11,25 +11,25 @@ The scope is deliberately precise: this is municipal-property consumption, not t
 | Layer | Versioned result |
 |---|---|
 | Data | 864 observations; 8 properties × 108 months; Jan 2010–Dec 2018; unit `M3`; no missing property-months |
-| Development selection | ETS won seven-origin expanding backtesting: MASE **1.099**, vs SARIMA 1.219, harmonic Ridge 1.392, seasonal naïve 1.393 |
-| Sealed 2018, properties | Selected ETS: MAE **24.52 m³**, RMSE 32.62, sMAPE 24.93%, MASE **0.812** across 96 forecasts |
+| Development selection | ETS won seven-origin expanding backtesting: MASE **1.138**, vs SARIMA 1.219, harmonic Ridge 1.392, seasonal naïve 1.393 |
+| Sealed 2018, properties | Selected ETS: MAE **24.39 m³**, RMSE 34.41, sMAPE 24.65%, MASE **0.793** across 96 forecasts |
 | Honest negative result | Paper-derived SARIMA scored better ex post on property MASE (**0.734**), but was not substituted after seeing the holdout |
-| Aggregate 2018 | ETS MASE **0.571**, MAE 66.23 m³ across 12 forecasts |
-| 90% intervals | Property coverage **98.96%**, mean width **167.31 m³**; over-conservative, with h2–3 coverage 93.75% |
-| Difficult periods | High-demand MAE **43.07 m³** vs 22.83 otherwise; high-demand interval coverage 100%, but width rose to 199.73 m³ |
-| Anomaly layer | **3 statistical high-use signals**, 217.38 m³ total observed residual excess; zero confirmed-leak labels |
-| Optimization | Base: **0.00%** gain because all three candidates fit; at a binding 6-hour budget: **7.67%** expected-value gain |
-| Paper-to-code | First-half 2018 property MASE: reproduced SARIMA **0.708** vs ETS 0.785; SARIMA won 4/8 sites, ETS won 4/8 and the aggregate |
+| Aggregate 2018 | ETS MASE **0.630**, MAE 73.08 m³ across 12 forecasts |
+| 90% intervals | Property coverage **97.92%**, mean width **162.74 m³**; over-conservative, with h2–3 coverage 93.75% |
+| Difficult periods | High-demand MAE **48.21 m³** vs 22.23 otherwise; high-demand interval coverage 100%, but width rose to 190.91 m³ |
+| Anomaly layer | **3 statistical high-use signals**, 207.62 m³ total observed residual excess; zero confirmed-leak labels |
+| Optimization | Base: **0.00%** gain because all three candidates fit; at a binding 8-hour budget: **14.59%** expected-value gain |
+| Paper-to-code | First-half 2018 property MASE: reproduced SARIMA **0.708** vs ETS 0.809; SARIMA won 4/8 sites, ETS won 4/8 and the aggregate |
 
 Every number above is read from [`artifacts/v1.0.0/metrics.json`](artifacts/v1.0.0/metrics.json); underlying forecasts and decisions are committed as CSV.
 
-![Forecast benchmark](artifacts/v1.0.0/figures/forecast-benchmark.png?v=20260830-helsinki-water-v1)
+![Forecast benchmark](artifacts/v1.0.0/figures/forecast-benchmark.png?v=20260831-deterministic-ets-v2)
 
 ## What was built
 
 - Reproducible acquisition from the City of Helsinki Nuuka Open API, with ignored raw responses, committed curated data and SHA-256 provenance.
 - Strict complete-panel validation before modeling.
-- Seasonal naïve, additive damped ETS, independently implemented AIC-selected SARIMA and harmonic Ridge approaches.
+- Seasonal naïve, deterministic grid-fitted additive damped ETS, independently implemented AIC-selected SARIMA and harmonic Ridge approaches.
 - Chronological development backtests and a sealed 2018 test year; no future-derived features or retrospective model switch.
 - Scale-normalized conformal intervals calibrated only from development residuals and evaluated by horizon, season and high demand.
 - One-step statistical anomaly monitoring, with language that separates a signal, possible operational risk and a confirmed leak.
@@ -37,7 +37,7 @@ Every number above is read from [`artifacts/v1.0.0/metrics.json`](artifacts/v1.0
 - One-factor sensitivity analysis that shows when optimization helps and, more importantly here, when it does not.
 - Independent method reproduction of Ristow, Henning & Kalbusch (2021), with setup differences and failed assumptions documented.
 
-![Sealed aggregate forecast](artifacts/v1.0.0/figures/aggregate-holdout.png?v=20260830-helsinki-water-v1)
+![Sealed aggregate forecast](artifacts/v1.0.0/figures/aggregate-holdout.png?v=20260831-deterministic-ets-v2)
 
 ## Data decision
 
@@ -57,9 +57,9 @@ confirmation_weight_i × excess_m3_i × persistence × missed_m3_cost
 
 CP-SAT maximizes the sum of selected values under a technician-hour budget, zone setup time, monthly capacity and per-site limits. Confirmation weights are declared scenario assumptions—not learned probabilities. The baseline simply takes highest standardized residual first.
 
-In the base case all three candidates fit in 8.13 of 12 available hours, so both policies are identical. With a binding 6-hour budget, greedy residual ranking chooses one central-zone inspection; CP-SAT instead bundles two east-zone inspections and improves assumed expected value by 7.67%, while covering 129.23 m³ rather than 88.15 m³ of observed excess. This is a measured routing/setup trade-off under declared assumptions, not evidence of realized savings.
+In the base case all three candidates fit in 8.13 of 12 available hours, so both policies are identical. With a binding 8-hour budget, greedy residual ranking chooses Suutarila and Tammisalo; CP-SAT replaces Tammisalo with the higher-value Kontula candidate and improves assumed expected value by 14.59%, while covering 156.97 m³ rather than 134.32 m³ of observed excess. This is a measured decision trade-off under declared assumptions, not evidence of realized savings.
 
-![Optimization sensitivity](artifacts/v1.0.0/figures/optimization-sensitivity.png?v=20260830-helsinki-water-v1)
+![Optimization sensitivity](artifacts/v1.0.0/figures/optimization-sensitivity.png?v=20260831-deterministic-ets-v2)
 
 ## Reproduce
 
@@ -82,10 +82,11 @@ mypy src
 - [`reports/scientific-report.md`](reports/scientific-report.md) — full methods, equations, results, failure analysis and limitations
 - [`reports/feasibility-audit.md`](reports/feasibility-audit.md) — official-source audit and data boundary
 - [`reports/paper-reproduction.md`](reports/paper-reproduction.md) — exact paper, reproduced method and non-equivalences
+- [`reports/numerical-reproducibility.md`](reports/numerical-reproducibility.md) — measured Windows/Linux drift, root cause and strict verification contract
 - [`artifacts/v1.0.0/`](artifacts/v1.0.0/) — machine-readable metrics, predictions, anomalies, scenarios and figures
 - [`src/helsinki_water/`](src/helsinki_water/) — acquisition, validation, models, uncertainty and optimization package
 
-Dependency versions are pinned. Local reruns are byte-stable; CI also performs a semantic artifact comparison with exact identities and a declared 5% / 0.5 m³ numeric tolerance because ETS optimization and font rendering can differ slightly across operating systems and BLAS implementations.
+Dependency versions are pinned. The ETS implementation uses a declared grid and sequential IEEE-754 arithmetic rather than a platform optimizer. CI checks interval columns at `rtol=1e-12`, `atol=1e-9 m³`, all other numeric evidence at `1e-9`, and identities exactly; only PNG bytes are exempt because font rendering differs by operating system.
 
 ## What this project proves—and does not
 

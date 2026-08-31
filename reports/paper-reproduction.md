@@ -29,6 +29,6 @@ Accordingly, the final report calls the result a **method reproduction on a diff
 
 ## Measured reproduction result
 
-On the paper-aligned first six months of the sealed 2018 holdout, the reproduced SARIMA method achieved property-panel MASE 0.708 and MAE 22.17 m³, compared with ETS MASE 0.785 and MAE 24.22 m³. SARIMA won four of eight properties and ETS won the other four. On the portfolio aggregate the ordering reversed: ETS MASE 0.588 versus SARIMA 0.732.
+On the paper-aligned first six months of the sealed 2018 holdout, the reproduced SARIMA method achieved property-panel MASE 0.708 and MAE 22.17 m³, compared with deterministic-grid ETS MASE 0.809 and MAE 24.97 m³. SARIMA won four of eight properties and ETS won the other four. On the portfolio aggregate the ordering reversed: ETS MASE 0.655 versus SARIMA 0.732.
 
 This supports a limited conclusion: the core method was reproduced and was competitive on these data. It does not support a universal SARIMA advantage or an exact replication of the paper. All values come from `artifacts/v1.0.0/metrics.json`.

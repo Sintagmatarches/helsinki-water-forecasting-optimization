@@ -25,8 +25,8 @@ jobs:
         run: cp -R artifacts/v1.0.0 "$RUNNER_TEMP/reference-v1.0.0"
       - run: python -m helsinki_water.cli run
       - run: python -m helsinki_water.cli report
-      # ETS optimizers vary slightly across BLAS/OS builds; identities remain exact and
-      # numeric evidence must stay within the declared 5% / 0.5 m3 tolerance.
+      # Deterministic ETS removes the former BLAS/optimizer drift. Interval columns now
+      # use 1e-12 relative / 1e-9 m3 absolute comparison; other numerics use 1e-9.
       - name: Verify artifact semantics across numerical platforms
         run: python -m helsinki_water.verification "$RUNNER_TEMP/reference-v1.0.0" artifacts/v1.0.0
       - name: Verify curated data are unchanged

@@ -16,6 +16,11 @@ CSV_ARTIFACTS = (
     "optimization-sensitivity.csv",
     "statistical-anomalies.csv",
 )
+NUMERIC_RTOL = 1e-9
+NUMERIC_ATOL = 1e-9
+INTERVAL_COLUMNS = {"interval_q", "lower_m3", "upper_m3", "interval_width_m3"}
+INTERVAL_RTOL = 1e-12
+INTERVAL_ATOL = 1e-9
 IDENTITY_COLUMNS = {
     "split",
     "model",
@@ -41,7 +46,12 @@ def _compare_json(reference: Any, current: Any, path: str = "root") -> None:
             raise AssertionError(f"Integer evidence changed at {path}: {reference} != {current}")
         return
     if isinstance(reference, (int, float)) and isinstance(current, (int, float)):
-        if not math.isclose(float(reference), float(current), rel_tol=0.05, abs_tol=0.01):
+        if not math.isclose(
+            float(reference),
+            float(current),
+            rel_tol=NUMERIC_RTOL,
+            abs_tol=NUMERIC_ATOL,
+        ):
             raise AssertionError(f"Numeric evidence changed at {path}: {reference} != {current}")
         return
     if isinstance(reference, dict) and isinstance(current, dict):
@@ -68,19 +78,19 @@ def _compare_csv(reference_path: Path, current_path: Path) -> None:
     if reference.shape != current.shape:
         raise AssertionError(f"CSV shape changed: {current_path.name}")
     for column in reference.columns:
-        if column == "model_details":
-            continue
         left = reference[column]
         right = current[column]
         if column in IDENTITY_COLUMNS or not pd.api.types.is_numeric_dtype(left):
             if not left.fillna("<NA>").astype(str).equals(right.fillna("<NA>").astype(str)):
                 raise AssertionError(f"Identity column changed: {current_path.name}:{column}")
             continue
+        relative_tolerance = INTERVAL_RTOL if column in INTERVAL_COLUMNS else NUMERIC_RTOL
+        absolute_tolerance = INTERVAL_ATOL if column in INTERVAL_COLUMNS else NUMERIC_ATOL
         if not np.allclose(
             left.to_numpy(dtype=float),
             right.to_numpy(dtype=float),
-            rtol=0.05,
-            atol=0.5,
+            rtol=relative_tolerance,
+            atol=absolute_tolerance,
             equal_nan=True,
         ):
             raise AssertionError(f"Numeric column changed: {current_path.name}:{column}")

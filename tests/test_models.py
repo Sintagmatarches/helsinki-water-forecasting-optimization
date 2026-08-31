@@ -28,3 +28,12 @@ def test_forecast_uses_only_training_values() -> None:
     third = forecast("harmonic_ridge", future_b[:-3], 3).values
     np.testing.assert_allclose(first, second)
     np.testing.assert_allclose(first, third)
+
+
+def test_deterministic_ets_is_exactly_repeatable() -> None:
+    values = seasonal_values()
+    first = forecast("ets", values, 12)
+    second = forecast("ets", values.copy(), 12)
+    np.testing.assert_array_equal(first.values, second.values)
+    assert first.details == second.details
+    assert first.details["specification"] == "ETS(A,Ad,A), deterministic grid"

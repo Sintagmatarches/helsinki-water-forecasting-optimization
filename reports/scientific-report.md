@@ -28,7 +28,7 @@ FMI weather data are available, but v1 remains univariate. The two reviewed port
 Four approaches are fitted independently to each property and the portfolio total:
 
 1. **Seasonal naïve:** `forecast(t+h) = actual(t+h−12)`.
-2. **ETS:** additive error, damped additive trend and additive 12-month seasonality, ETS(A,Ad,A).
+2. **ETS:** additive error, damped additive trend and additive 12-month seasonality, ETS(A,Ad,A), fitted by a declared deterministic coefficient grid.
 3. **Paper-derived SARIMA:** six declared monthly seasonal ARIMA candidates; the converged minimum-AIC candidate is selected on training data only.
 4. **Harmonic Ridge:** recursive regularized regression using lags 1, 2 and 12, trailing 3- and 12-month means, annual sine/cosine terms and trend.
 
@@ -48,7 +48,7 @@ Metrics are MAE, RMSE, sMAPE and MASE. MASE uses the mean absolute 12-month seas
 
 | Model | N | MAE m³ | RMSE m³ | sMAPE | MASE |
 |---|---:|---:|---:|---:|---:|
-| ETS | 336 | 32.69 | 53.18 | 35.93% | **1.099** |
+| ETS | 336 | 34.66 | 55.84 | 35.85% | **1.138** |
 | Paper SARIMA | 336 | 37.09 | 57.91 | 37.32% | 1.219 |
 | Harmonic Ridge | 336 | 42.02 | 62.24 | 39.17% | 1.392 |
 | Seasonal naïve | 336 | 42.76 | 66.05 | 39.62% | 1.393 |
@@ -60,19 +60,19 @@ ETS wins the prespecified rule, although its development MASE remains above 1.
 | Model | N | MAE m³ | RMSE m³ | sMAPE | MASE |
 |---|---:|---:|---:|---:|---:|
 | Paper SARIMA | 96 | **22.53** | **31.83** | **23.66%** | **0.734** |
-| ETS (selected) | 96 | 24.52 | 32.62 | 24.93% | 0.812 |
+| ETS (selected) | 96 | 24.39 | 34.41 | 24.65% | 0.793 |
 | Seasonal naïve | 96 | 26.69 | 45.18 | 23.99% | 0.889 |
 | Harmonic Ridge | 96 | 27.74 | 39.10 | 27.39% | 0.890 |
 
 SARIMA is better ex post on the property panel but is not retrospectively promoted. The divergence between development and holdout is a negative result about selection stability.
 
-On the aggregate 2018 series, ETS did win: MAE 66.23 m³ and MASE 0.571, versus SARIMA MAE 79.68 m³ and MASE 0.687.
+On the aggregate 2018 series, ETS did win: MAE 73.08 m³ and MASE 0.630, versus SARIMA MAE 79.68 m³ and MASE 0.687.
 
 ### Error and residual analysis
 
-- Winter MAE: 20.40 m³; shoulder: 25.64; summer: 26.38.
-- Months above each property's pre-2018 90th percentile: MAE 43.07 m³, versus 22.83 otherwise.
-- Development ETS residuals: Jarque–Bera p = 2.37×10⁻¹⁴⁸; Ljung–Box lag-6 p = 1.23×10⁻⁴⁶.
+- Winter MAE: 18.57 m³; shoulder: 25.13; summer: 28.75.
+- Months above each property's pre-2018 90th percentile: MAE 48.21 m³, versus 22.23 otherwise.
+- Development ETS residuals: Jarque–Bera p = 7.02×10⁻¹⁷⁸; Ljung–Box lag-6 p = 1.90×10⁻³⁹.
 
 High-use periods are harder, and ideal Gaussian independent-error assumptions are rejected.
 
@@ -85,11 +85,11 @@ This is a practical pooled approximation. Serial dependence and heterogeneous pr
 ### Final interval behavior
 
 - Nominal level: 90%.
-- Property coverage: **98.96%** across 96 forecasts; mean width **167.31 m³**.
-- h1: 100% / 122.28 m³; h2–3: 93.75% / 181.93 m³.
-- h4–6: 100% / 158.58 m³; h7–12: 100% / 174.31 m³.
-- High-demand months: 100% / 199.73 m³; other months: 98.86% / 164.37 m³.
-- Aggregate: 100% coverage and 652.41 m³ mean width.
+- Property coverage: **97.92%** across 96 forecasts; mean width **162.74 m³**.
+- h1: 100% / 110.55 m³; h2–3: 93.75% / 161.11 m³.
+- h4–6: 100% / 166.26 m³; h7–12: 97.92% / 170.21 m³.
+- High-demand months: 100% / 190.91 m³; other months: 97.73% / 160.18 m³.
+- Aggregate: 100% coverage and 630.42 m³ mean width.
 
 The method misses one h2–3 observation but is otherwise excessively wide. Coverage above nominal is not automatic success: sharpness is poor and operational selectivity is limited.
 
@@ -99,11 +99,11 @@ The system refits ETS at each month-end in 2018 and predicts one month ahead. A 
 
 | Property / month | Actual m³ | Forecast m³ | Positive residual m³ | Standardized excess |
 |---|---:|---:|---:|---:|
-| Kontulan ala-aste / 2018-05 | 185 | 114.80 | 70.20 | 1.96 |
-| Suutarilan portfolio / 2018-06 | 265 | 176.85 | 88.15 | 2.69 |
-| Tammisalo / 2018-07 | 78 | 18.97 | 59.03 | 2.65 |
+| Kontulan ala-aste / 2018-05 | 185 | 111.70 | 73.30 | 2.05 |
+| Suutarilan portfolio / 2018-06 | 265 | 181.33 | 83.67 | 2.56 |
+| Tammisalo / 2018-07 | 78 | 27.34 | 50.66 | 2.27 |
 
-The three signals contain 217.38 m³ of observed positive forecast residual. That is not estimated leakage. There are no confirmed leak labels, maintenance outcomes or causal counterfactuals, so precision, recall and leak-detection claims are unavailable.
+The three signals contain 207.62 m³ of observed positive forecast residual. That is not estimated leakage. There are no confirmed leak labels, maintenance outcomes or causal counterfactuals, so precision, recall and leak-detection claims are unavailable.
 
 ## 8. Prescriptive optimization
 
@@ -121,24 +121,24 @@ The comparison baseline greedily considers highest standardized residual first u
 
 ### Base result
 
-With a 12-hour budget, all three candidates require 8.13 hours across two zones. Both policies select all three, score assumed expected value 983.49 and cover 217.38 m³ of residual excess. Improvement is **0.00%** because the constraints do not force a meaningful choice.
+With a 12-hour budget, all three candidates require 8.13 hours across two zones. Both policies select all three, score assumed expected value 784.21 and cover 207.62 m³ of residual excess. Improvement is **0.00%** because the constraints do not force a meaningful choice.
 
 ## 9. Sensitivity and scenarios
 
 | One-factor change | Candidates | Gain over baseline | Interpretation |
 |---|---:|---:|---|
-| Budget 4 / 8 / 20 h | 3 | 0% | Greedy ordering remains optimal |
-| Budget 6 h | 3 | **7.67%** | Zone setup makes two east reviews better than one central review |
+| Budget 4 / 6 / 20 h | 3 | 0% | Greedy ordering remains optimal |
+| Budget 8 h | 3 | **14.59%** | Expected value favors Kontula over the slightly larger standardized Tammisalo signal |
 | False-positive cost 0 / 150 | 3 | 0% | Same decisions remain positive |
 | Missed-volume value 2 | 3 | 0% | All three reviews remain selected |
 | Missed-volume value 10 | 3 | 0% | All reviews become valuable |
-| Interval multiplier 0.75 | 5 | 0% | More signals; all fit and order agrees |
+| Interval multiplier 0.75 | 7 | 0% | More signals; all fit and order agrees |
 | Interval multiplier 1.5 | 0 | 0% | Wider uncertainty suppresses all signals |
 | Persistence 2 months | 3 | 0% | Same decisions remain positive |
 | Persistence 6 months | 3 | 0% | All reviews become valuable |
 | Zone setup 0.5 / 2 h | 3 | 0% | No policy reversal |
 
-At six budget hours, optimized expected value is 509.91 versus 473.58. Greedy selection takes the highest standardized residual in the central zone and covers 88.15 m³; CP-SAT exploits shared east-zone activation, chooses two candidates and covers 129.23 m³. This produces a 7.67% objective gain. The advantage disappears at 4, 8, 12 and 20 hours and in the other tested one-factor scenarios because constraints are either too tight, non-binding or aligned with the greedy ordering.
+At eight budget hours, optimized expected value is 655.50 versus 572.06. Greedy selection takes Suutarila and Tammisalo and covers 134.32 m³; CP-SAT replaces Tammisalo with the higher-value Kontula candidate and covers 156.97 m³. This produces a 14.59% objective gain. The advantage disappears at 4, 6, 12 and 20 hours and in the other tested one-factor scenarios because constraints are either too tight, non-binding or aligned with the greedy ordering.
 
 ## 10. Paper-to-code reproduction
 
@@ -148,9 +148,9 @@ The reproduced component is the paper's AIC-selected seasonal ARIMA decision pat
 
 For the paper-aligned first six months of 2018:
 
-- Property panel: SARIMA MASE 0.708, MAE 22.17 m³; ETS MASE 0.785, MAE 24.22 m³.
+- Property panel: SARIMA MASE 0.708, MAE 22.17 m³; ETS MASE 0.809, MAE 24.97 m³.
 - Property wins: SARIMA 4/8, ETS 4/8.
-- Aggregate: ETS MASE 0.588, MAE 68.12 m³; SARIMA MASE 0.732, MAE 84.88 m³.
+- Aggregate: ETS MASE 0.655, MAE 75.87 m³; SARIMA MASE 0.732, MAE 84.88 m³.
 
 This is a mixed method reproduction, not an exact replication or a universal ranking. Geography, aggregation, meter regime, time span and software differ from the Brazilian study.
 
@@ -158,9 +158,9 @@ This is a mixed method reproduction, not an exact replication or a universal ran
 
 - `src/` package layout, typed modules and CLI.
 - Deterministic seeds and declared candidate grid.
-- Automated validation and seven unit tests.
+- Automated validation and 11 regression/unit tests.
 - Ruff and strict mypy in CI.
-- GitHub Actions reruns metrics and figures, enforces exact artifact structure and identity fields, and checks numerical evidence within a narrow tolerance for cross-platform BLAS differences.
+- GitHub Actions reruns metrics and figures, enforces exact artifact structure and identity fields, and checks interval numerics at `rtol=1e-12` / `atol=1e-9 m³` after replacing the platform-dependent ETS optimizer.
 - Versioned JSON, CSV and PNG outputs.
 - Raw responses, environments, caches and secrets excluded from git.
 - No credentials or manual access required.

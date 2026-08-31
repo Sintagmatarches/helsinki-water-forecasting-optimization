@@ -17,10 +17,12 @@ def horizon_bucket(horizon: int) -> str:
 
 
 def conformal_quantile(values: np.ndarray, alpha: float) -> float:
-    clean = np.sort(np.asarray(values, dtype=float)[np.isfinite(values)])
+    raw = np.asarray(values, dtype=float)
+    clean = np.sort(raw[np.isfinite(raw)], kind="stable")
     if len(clean) == 0:
         raise ValueError("Conformal calibration requires residuals")
     rank = min(len(clean), math.ceil((len(clean) + 1) * (1.0 - alpha)))
+    # A finite-sample conformal order statistic: no interpolation is performed.
     return float(clean[rank - 1])
 
 

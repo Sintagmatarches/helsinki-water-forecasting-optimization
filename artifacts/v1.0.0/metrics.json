@@ -28,10 +28,10 @@
       "split": "development",
       "model": "ets",
       "observations": 336,
-      "mae_m3": 32.689350137659574,
-      "rmse_m3": 53.175992779721916,
-      "smape": 0.35930178487336284,
-      "mase": 1.0988089002667452
+      "mae_m3": 34.65603020356289,
+      "rmse_m3": 55.84254494798796,
+      "smape": 0.35854050957862355,
+      "mase": 1.1377333074658473
     },
     {
       "split": "development",
@@ -66,10 +66,10 @@
       "split": "development",
       "model": "ets",
       "observations": 378,
-      "mae_m3": 43.430235919891345,
-      "rmse_m3": 74.97345425791859,
-      "smape": 0.33595322259098775,
-      "mase": 1.100058446961472
+      "mae_m3": 41.983172482669,
+      "rmse_m3": 69.75554504181716,
+      "smape": 0.33147781303436274,
+      "mase": 1.107810778789423
     },
     {
       "split": "development",
@@ -102,10 +102,10 @@
       "split": "final",
       "model": "ets",
       "observations": 108,
-      "mae_m3": 29.152732944976748,
-      "rmse_m3": 41.31240288354683,
-      "smape": 0.2287696032793025,
-      "mase": 0.7852809496246437
+      "mae_m3": 29.80209955786618,
+      "rmse_m3": 44.10047054465702,
+      "smape": 0.2267221892898125,
+      "mase": 0.7749032023096837
     },
     {
       "split": "final",
@@ -140,10 +140,10 @@
       "split": "final",
       "model": "ets",
       "observations": 108,
-      "mae_m3": 29.152732944976748,
-      "rmse_m3": 41.31240288354683,
-      "smape": 0.2287696032793025,
-      "mase": 0.7852809496246437
+      "mae_m3": 29.80209955786618,
+      "rmse_m3": 44.10047054465702,
+      "smape": 0.2267221892898125,
+      "mase": 0.7749032023096837
     },
     {
       "split": "final",
@@ -178,10 +178,10 @@
       "split": "final",
       "model": "ets",
       "observations": 96,
-      "mae_m3": 24.517975397465847,
-      "rmse_m3": 32.61719588859881,
-      "smape": 0.24929523716038982,
-      "mase": 0.8120130352635117
+      "mae_m3": 24.39273702405252,
+      "rmse_m3": 34.40708543522244,
+      "smape": 0.24646728300695833,
+      "mase": 0.7929546298993451
     },
     {
       "split": "final",
@@ -216,10 +216,10 @@
       "split": "final",
       "model": "ets",
       "observations": 12,
-      "mae_m3": 66.23079332506397,
-      "rmse_m3": 82.76098082448382,
-      "smape": 0.06456453223060422,
-      "mase": 0.5714242645136991
+      "mae_m3": 73.07699982837549,
+      "rmse_m3": 89.62635379824334,
+      "smape": 0.06876143955264559,
+      "mase": 0.6304917815923934
     },
     {
       "split": "final",
@@ -254,37 +254,37 @@
     "method": "90% pooled scale-normalized expanding-backtest conformal intervals, calibrated by horizon bucket",
     "alpha": 0.1,
     "quantilesByHorizon": {
-      "h1": 1.9560832420395615,
-      "h2-3": 2.952097419162971,
-      "h4-6": 2.733442812786802,
-      "h7-12": 2.952097419162971
+      "h1": 1.7684269214810409,
+      "h2-3": 2.5925197633047894,
+      "h4-6": 2.8534829568933566,
+      "h7-12": 2.8534829568933566
     },
     "propertyPanelFinal": {
-      "coverage": 0.9895833333333334,
-      "meanWidthM3": 167.31232103513798,
+      "coverage": 0.9791666666666666,
+      "meanWidthM3": 162.7377436315916,
       "byHorizon": [
         {
           "horizon_bucket": "h1",
           "coverage": 1.0,
-          "mean_width_m3": 122.27848933273496,
+          "mean_width_m3": 110.54773529401126,
           "observations": 8
         },
         {
           "horizon_bucket": "h2-3",
           "coverage": 0.9375,
-          "mean_width_m3": 181.93381631904998,
+          "mean_width_m3": 161.11373963165607,
           "observations": 16
         },
         {
           "horizon_bucket": "h4-6",
           "coverage": 1.0,
-          "mean_width_m3": 158.5754651635545,
+          "mean_width_m3": 166.26310927963542,
           "observations": 24
         },
         {
           "horizon_bucket": "h7-12",
-          "coverage": 1.0,
-          "mean_width_m3": 174.31255582669291,
+          "coverage": 0.9791666666666666,
+          "mean_width_m3": 170.21473019714495,
           "observations": 48
         }
       ],
@@ -292,49 +292,49 @@
         {
           "season": "shoulder",
           "coverage": 0.9791666666666666,
-          "mean_width_m3": 179.98506073806755,
+          "mean_width_m3": 175.55801058123313,
           "observations": 48
         },
         {
           "season": "summer",
-          "coverage": 1.0,
-          "mean_width_m3": 149.16503177190353,
+          "coverage": 0.9583333333333334,
+          "mean_width_m3": 151.83165669939123,
           "observations": 24
         },
         {
           "season": "winter",
           "coverage": 1.0,
-          "mean_width_m3": 160.11413089251337,
+          "mean_width_m3": 148.00329666450898,
           "observations": 24
         }
       ]
     },
     "aggregateFinal": {
       "coverage": 1.0,
-      "meanWidthM3": 652.4122775875784,
+      "meanWidthM3": 630.421706256813,
       "byHorizon": [
         {
           "horizon_bucket": "h1",
           "coverage": 1.0,
-          "mean_width_m3": 453.43872486898033,
+          "mean_width_m3": 409.9382025604623,
           "observations": 1
         },
         {
           "horizon_bucket": "h2-3",
           "coverage": 1.0,
-          "mean_width_m3": 684.3242969754925,
+          "mean_width_m3": 600.9707717984625,
           "observations": 2
         },
         {
           "horizon_bucket": "h4-6",
           "coverage": 1.0,
-          "mean_width_m3": 633.6380767926739,
+          "mean_width_m3": 661.4645254360411,
           "observations": 3
         },
         {
           "horizon_bucket": "h7-12",
           "coverage": 1.0,
-          "mean_width_m3": 684.3242969754924,
+          "mean_width_m3": 661.4645254360408,
           "observations": 6
         }
       ],
@@ -342,19 +342,19 @@
         {
           "season": "shoulder",
           "coverage": 1.0,
-          "mean_width_m3": 667.4288902478862,
+          "mean_width_m3": 651.3822331631112,
           "observations": 6
         },
         {
           "season": "summer",
           "coverage": 1.0,
-          "mean_width_m3": 667.4288902478863,
+          "mean_width_m3": 661.4645254360408,
           "observations": 3
         },
         {
           "season": "winter",
           "coverage": 1.0,
-          "mean_width_m3": 607.3624396066551,
+          "mean_width_m3": 557.4578332649886,
           "observations": 3
         }
       ]
@@ -363,14 +363,14 @@
       {
         "high_demand": false,
         "observations": 88,
-        "empirical_coverage": 0.9886363636363636,
-        "mean_width_m3": 164.3655631005529
+        "empirical_coverage": 0.9772727272727273,
+        "mean_width_m3": 160.17706789943733
       },
       {
         "high_demand": true,
         "observations": 8,
         "empirical_coverage": 1.0,
-        "mean_width_m3": 199.72665831557413
+        "mean_width_m3": 190.9051766852886
       }
     ]
   },
@@ -379,43 +379,43 @@
       {
         "season": "shoulder",
         "observations": 48,
-        "mae_m3": 25.643982713578584
+        "mae_m3": 25.127229628455087
       },
       {
         "season": "summer",
         "observations": 24,
-        "mae_m3": 26.38282897135159
+        "mae_m3": 28.748489706604673
       },
       {
         "season": "winter",
         "observations": 24,
-        "mae_m3": 20.401107191354615
+        "mae_m3": 18.56799913269521
       }
     ],
     "byHighDemand": [
       {
         "high_demand": false,
         "observations": 88,
-        "mae_m3": 22.831794864173354
+        "mae_m3": 22.227209755252844
       },
       {
         "high_demand": true,
         "observations": 8,
-        "mae_m3": 43.06596126368324
+        "mae_m3": 48.213536980848914
       }
     ]
   },
   "residualDiagnostics": {
-    "jarqueBeraStatistic": 679.837478227656,
-    "jarqueBeraPValue": 2.3722874282775987e-148,
-    "ljungBoxLag6Statistic": 229.03120925723468,
-    "ljungBoxLag6PValue": 1.232504968661575e-46,
+    "jarqueBeraStatistic": 815.8236760163943,
+    "jarqueBeraPValue": 7.016808918975605e-178,
+    "ljungBoxLag6Statistic": 195.2930765475319,
+    "ljungBoxLag6PValue": 1.904695611408967e-39,
     "interpretation": "Small p-values reject the corresponding idealized residual assumption; diagnostics are reported, not used to hide a model failure."
   },
   "anomalyLayer": {
     "definition": "Observed monthly use above the one-step 90% conformal upper bound; this is a statistical anomaly and possible operational review signal, not a confirmed leak.",
     "candidateCount": 3,
-    "observedExcessM3": 217.377730584063
+    "observedExcessM3": 207.6227332300021
   },
   "optimization": {
     "candidateCount": 3,
@@ -440,8 +440,8 @@
       ],
       "technicianHours": 8.13,
       "activatedZones": 2,
-      "expectedDecisionValue": 983.4928607750608,
-      "capturedObservedExcessM3": 217.377730584063
+      "expectedDecisionValue": 784.2055755100464,
+      "capturedObservedExcessM3": 207.6227332300021
     },
     "optimized": {
       "policy": "CP-SAT expected-value policy",
@@ -453,8 +453,8 @@
       ],
       "technicianHours": 8.13,
       "activatedZones": 2,
-      "expectedDecisionValue": 983.4928607750606,
-      "capturedObservedExcessM3": 217.377730584063
+      "expectedDecisionValue": 784.2055755100463,
+      "capturedObservedExcessM3": 207.6227332300021
     },
     "improvementPct": 0.0
   },
@@ -463,91 +463,91 @@
       "scenario": "base",
       "candidateCount": 3,
       "improvementPct": 0.0,
-      "baselineValue": 983.4928607750608,
-      "optimizedValue": 983.4928607750606,
-      "baselineExcessM3": 217.377730584063,
-      "optimizedExcessM3": 217.377730584063
+      "baselineValue": 784.2055755100464,
+      "optimizedValue": 784.2055755100463,
+      "baselineExcessM3": 207.6227332300021,
+      "optimizedExcessM3": 207.6227332300021
     },
     {
       "scenario": "budget_hours=4",
       "candidateCount": 3,
       "improvementPct": 0.0,
-      "baselineValue": 473.5807662936794,
-      "optimizedValue": 473.5807662936794,
-      "baselineExcessM3": 88.14529871017473,
-      "optimizedExcessM3": 88.14529871017473
+      "baselineValue": 443.35982792511027,
+      "optimizedValue": 443.35982792511027,
+      "baselineExcessM3": 83.66812265557189,
+      "optimizedExcessM3": 83.66812265557189
     },
     {
       "scenario": "budget_hours=6",
       "candidateCount": 3,
-      "improvementPct": 7.671622408155809,
-      "baselineValue": 473.5807662936794,
-      "optimizedValue": 509.9120944813813,
-      "baselineExcessM3": 88.14529871017473,
-      "optimizedExcessM3": 129.23243187388826
+      "improvementPct": 0.0,
+      "baselineValue": 443.35982792511027,
+      "optimizedValue": 443.35982792511027,
+      "baselineExcessM3": 83.66812265557189,
+      "optimizedExcessM3": 83.66812265557189
     },
     {
       "scenario": "budget_hours=8",
       "candidateCount": 3,
-      "improvementPct": 0.0,
-      "baselineValue": 785.2792194403319,
-      "optimizedValue": 785.2792194403319,
-      "baselineExcessM3": 147.17469917634546,
-      "optimizedExcessM3": 147.17469917634546
+      "improvementPct": 14.585313367860252,
+      "baselineValue": 572.0640355897798,
+      "optimizedValue": 655.5013678453768,
+      "baselineExcessM3": 134.32461324772066,
+      "optimizedExcessM3": 156.96624263785333
     },
     {
       "scenario": "budget_hours=20",
       "candidateCount": 3,
       "improvementPct": 0.0,
-      "baselineValue": 983.4928607750608,
-      "optimizedValue": 983.4928607750606,
-      "baselineExcessM3": 217.377730584063,
-      "optimizedExcessM3": 217.377730584063
+      "baselineValue": 784.2055755100464,
+      "optimizedValue": 784.2055755100463,
+      "baselineExcessM3": 207.6227332300021,
+      "optimizedExcessM3": 207.6227332300021
     },
     {
       "scenario": "false_positive_cost=0",
       "candidateCount": 3,
       "improvementPct": 0.0,
-      "baselineValue": 1033.4928607750608,
-      "optimizedValue": 1033.4928607750608,
-      "baselineExcessM3": 217.377730584063,
-      "optimizedExcessM3": 217.377730584063
+      "baselineValue": 846.7055755100464,
+      "optimizedValue": 846.7055755100463,
+      "baselineExcessM3": 207.6227332300021,
+      "optimizedExcessM3": 207.6227332300021
     },
     {
       "scenario": "false_positive_cost=150",
       "candidateCount": 3,
       "improvementPct": 0.0,
-      "baselineValue": 883.4928607750608,
-      "optimizedValue": 883.4928607750606,
-      "baselineExcessM3": 217.377730584063,
-      "optimizedExcessM3": 217.377730584063
+      "baselineValue": 659.2055755100464,
+      "optimizedValue": 659.2055755100463,
+      "baselineExcessM3": 207.6227332300021,
+      "optimizedExcessM3": 207.6227332300021
     },
     {
       "scenario": "missed_m3_cost=2",
       "candidateCount": 3,
       "improvementPct": 0.0,
-      "baselineValue": 547.0452405167072,
-      "optimizedValue": 547.0452405167072,
-      "baselineExcessM3": 217.377730584063,
-      "optimizedExcessM3": 217.377730584063
+      "baselineValue": 410.0203836733643,
+      "optimizedValue": 410.0203836733643,
+      "baselineExcessM3": 207.6227332300021,
+      "optimizedExcessM3": 207.6227332300021
     },
     {
       "scenario": "missed_m3_cost=10",
       "candidateCount": 3,
       "improvementPct": 0.0,
-      "baselineValue": 4038.626202583536,
-      "optimizedValue": 4038.626202583536,
-      "baselineExcessM3": 217.377730584063,
-      "optimizedExcessM3": 217.377730584063
+      "baselineValue": 3403.501918366821,
+      "optimizedValue": 3403.501918366821,
+      "baselineExcessM3": 207.6227332300021,
+      "optimizedExcessM3": 207.6227332300021
     },
     {
       "scenario": "interval_multiplier=0.75",
-      "candidateCount": 5,
+      "candidateCount": 7,
       "improvementPct": 0.0,
-      "baselineValue": 1125.6257216298154,
-      "optimizedValue": 1125.6257216298154,
-      "baselineExcessM3": 278.718366329564,
-      "optimizedExcessM3": 278.718366329564
+      "baselineValue": 980.8066257290317,
+      "optimizedValue": 980.8066257290317,
+      "baselineExcessM3": 299.5229666119988,
+      "optimizedExcessM3": 299.52296661199887
     },
     {
       "scenario": "interval_multiplier=1.5",
@@ -562,37 +562,37 @@
       "scenario": "persistence_months=2",
       "candidateCount": 3,
       "improvementPct": 0.0,
-      "baselineValue": 547.0452405167072,
-      "optimizedValue": 547.0452405167072,
-      "baselineExcessM3": 217.377730584063,
-      "optimizedExcessM3": 217.377730584063
+      "baselineValue": 410.0203836733643,
+      "optimizedValue": 410.0203836733643,
+      "baselineExcessM3": 207.6227332300021,
+      "optimizedExcessM3": 207.6227332300021
     },
     {
       "scenario": "persistence_months=6",
       "candidateCount": 3,
       "improvementPct": 0.0,
-      "baselineValue": 2292.835721550121,
-      "optimizedValue": 2292.835721550121,
-      "baselineExcessM3": 217.377730584063,
-      "optimizedExcessM3": 217.377730584063
+      "baselineValue": 1906.7611510200927,
+      "optimizedValue": 1906.7611510200925,
+      "baselineExcessM3": 207.6227332300021,
+      "optimizedExcessM3": 207.6227332300021
     },
     {
       "scenario": "zone_activation_hours=0.5",
       "candidateCount": 3,
       "improvementPct": 0.0,
-      "baselineValue": 983.4928607750608,
-      "optimizedValue": 983.4928607750606,
-      "baselineExcessM3": 217.377730584063,
-      "optimizedExcessM3": 217.377730584063
+      "baselineValue": 784.2055755100464,
+      "optimizedValue": 784.2055755100463,
+      "baselineExcessM3": 207.6227332300021,
+      "optimizedExcessM3": 207.6227332300021
     },
     {
       "scenario": "zone_activation_hours=2",
       "candidateCount": 3,
       "improvementPct": 0.0,
-      "baselineValue": 983.4928607750608,
-      "optimizedValue": 983.4928607750606,
-      "baselineExcessM3": 217.377730584063,
-      "optimizedExcessM3": 217.377730584063
+      "baselineValue": 784.2055755100464,
+      "optimizedValue": 784.2055755100463,
+      "baselineExcessM3": 207.6227332300021,
+      "optimizedExcessM3": 207.6227332300021
     }
   ],
   "paperReproduction": {
@@ -607,10 +607,10 @@
         "split": "final",
         "model": "ets",
         "observations": 6,
-        "mae_m3": 68.123358206165,
-        "rmse_m3": 88.85580072913505,
-        "smape": 0.06630245735324863,
-        "mase": 0.5877528850983833
+        "mae_m3": 75.8664970710588,
+        "rmse_m3": 102.14004907300976,
+        "smape": 0.06222857333243329,
+        "mase": 0.6545589311800473
       },
       {
         "split": "final",
@@ -627,10 +627,10 @@
         "split": "final",
         "model": "ets",
         "observations": 48,
-        "mae_m3": 24.219712505024162,
-        "rmse_m3": 33.751401959840656,
-        "smape": 0.19910562990901484,
-        "mase": 0.7853661852298687
+        "mae_m3": 24.967813704633,
+        "rmse_m3": 33.36660971633064,
+        "smape": 0.217924398858073,
+        "mase": 0.8100710388678699
       },
       {
         "split": "final",
@@ -645,55 +645,55 @@
     "siteResults": [
       {
         "site": "1507 Suutarilan ala-asteen koulu, Päiväkoti Seulanen, Suutarilan monitoimitalo",
-        "etsMaeM3": 60.32996431024005,
+        "etsMaeM3": 51.689038357580536,
         "sarimaMaeM3": 40.94752060950898,
         "winner": "sarima_paper"
       },
       {
         "site": "2183 Latokartanon peruskoulu",
-        "etsMaeM3": 11.233029243629447,
+        "etsMaeM3": 10.317211827368746,
         "sarimaMaeM3": 11.743957699508366,
         "winner": "ets"
       },
       {
         "site": "4022 Taivallahden peruskoulu",
-        "etsMaeM3": 23.429370091627675,
+        "etsMaeM3": 26.090309442089833,
         "sarimaMaeM3": 28.473608382997508,
         "winner": "ets"
       },
       {
         "site": "4236 Itäkeskuksen peruskoulu",
-        "etsMaeM3": 11.431863988350543,
+        "etsMaeM3": 12.813607047874852,
         "sarimaMaeM3": 13.536198026636733,
         "winner": "ets"
       },
       {
         "site": "4303 Kontulan ala-asteen koulu",
-        "etsMaeM3": 43.99003557430742,
+        "etsMaeM3": 49.425399857037235,
         "sarimaMaeM3": 45.29435741085816,
-        "winner": "ets"
+        "winner": "sarima_paper"
       },
       {
         "site": "4320 Crusellin peruskoulu",
-        "etsMaeM3": 5.848312733887769,
+        "etsMaeM3": 14.193258364908777,
         "sarimaMaeM3": 4.924242821669757,
         "winner": "sarima_paper"
       },
       {
         "site": "4513 Aurinkolahden peruskoulu",
-        "etsMaeM3": 15.895460438704852,
+        "etsMaeM3": 14.368403223444867,
         "sarimaMaeM3": 14.80786315007896,
-        "winner": "sarima_paper"
+        "winner": "ets"
       },
       {
         "site": "4521 Tammisalon korttelitalo/Lpk Tammisalo/koulu",
-        "etsMaeM3": 21.599663659445568,
+        "etsMaeM3": 20.845281516759155,
         "sarimaMaeM3": 17.601619929643118,
         "winner": "sarima_paper"
       },
       {
         "site": "PORTFOLIO_TOTAL",
-        "etsMaeM3": 68.123358206165,
+        "etsMaeM3": 75.8664970710588,
         "sarimaMaeM3": 84.87538309258137,
         "winner": "ets"
       }
