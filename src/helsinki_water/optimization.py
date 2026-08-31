@@ -193,19 +193,19 @@ def sensitivity(
     base: DecisionAssumptions,
 ) -> list[dict[str, Any]]:
     scenarios: list[tuple[str, DecisionAssumptions]] = [("base", base)]
-    for value in (4.0, 8.0, 20.0):
+    for value in (4.0, 6.0, 8.0, 20.0):
         scenarios.append((f"budget_hours={value:g}", replace(base, budget_hours=value)))
     for value in (0.0, 150.0):
         scenarios.append(
             (f"false_positive_cost={value:g}", replace(base, false_positive_cost=value))
         )
-    for value in (1.0, 10.0):
+    for value in (2.0, 10.0):
         scenarios.append((f"missed_m3_cost={value:g}", replace(base, missed_m3_cost=value)))
     for value in (0.75, 1.5):
         scenarios.append(
             (f"interval_multiplier={value:g}", replace(base, interval_multiplier=value))
         )
-    for value in (1, 6):
+    for value in (2, 6):
         scenarios.append((f"persistence_months={value}", replace(base, persistence_months=value)))
     for value in (0.5, 2.0):
         scenarios.append(

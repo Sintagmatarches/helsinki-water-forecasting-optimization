@@ -31,3 +31,9 @@ jobs:
         run: python -m helsinki_water.verification "$RUNNER_TEMP/reference-v1.0.0" artifacts/v1.0.0
       - name: Verify curated data are unchanged
         run: git diff --exit-code -- data/processed
+      - name: Preserve Linux experiment evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-evidence-v1.0.0
+          path: artifacts/v1.0.0

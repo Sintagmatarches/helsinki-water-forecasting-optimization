@@ -128,16 +128,17 @@ With a 12-hour budget, all three candidates require 8.13 hours across two zones.
 | One-factor change | Candidates | Gain over baseline | Interpretation |
 |---|---:|---:|---|
 | Budget 4 / 8 / 20 h | 3 | 0% | Greedy ordering remains optimal |
+| Budget 6 h | 3 | **7.67%** | Zone setup makes two east reviews better than one central review |
 | False-positive cost 0 / 150 | 3 | 0% | Same decisions remain positive |
-| Missed-volume value 1 | 3 | **11.21%** | Optimizer excludes a negative-value review |
+| Missed-volume value 2 | 3 | 0% | All three reviews remain selected |
 | Missed-volume value 10 | 3 | 0% | All reviews become valuable |
 | Interval multiplier 0.75 | 5 | 0% | More signals; all fit and order agrees |
 | Interval multiplier 1.5 | 0 | 0% | Wider uncertainty suppresses all signals |
-| Persistence 1 month | 3 | **11.21%** | Same regime as low missed-volume value |
+| Persistence 2 months | 3 | 0% | Same decisions remain positive |
 | Persistence 6 months | 3 | 0% | All reviews become valuable |
 | Zone setup 0.5 / 2 h | 3 | 0% | No policy reversal |
 
-In the 11.21% scenario, optimized expected value is 122.99 versus 110.60, but it chooses only two candidates and covers 147.17 m³ rather than 217.38 m³. Optimization improves the declared objective, not every secondary measure. Its advantage disappears in most scenarios because the candidate set is small and constraints are usually non-binding.
+At six budget hours, optimized expected value is 509.91 versus 473.58. Greedy selection takes the highest standardized residual in the central zone and covers 88.15 m³; CP-SAT exploits shared east-zone activation, chooses two candidates and covers 129.23 m³. This produces a 7.67% objective gain. The advantage disappears at 4, 8, 12 and 20 hours and in the other tested one-factor scenarios because constraints are either too tight, non-binding or aligned with the greedy ordering.
 
 ## 10. Paper-to-code reproduction
 

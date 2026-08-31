@@ -18,7 +18,7 @@ The scope is deliberately precise: this is municipal-property consumption, not t
 | 90% intervals | Property coverage **98.96%**, mean width **167.31 m³**; over-conservative, with h2–3 coverage 93.75% |
 | Difficult periods | High-demand MAE **43.07 m³** vs 22.83 otherwise; high-demand interval coverage 100%, but width rose to 199.73 m³ |
 | Anomaly layer | **3 statistical high-use signals**, 217.38 m³ total observed residual excess; zero confirmed-leak labels |
-| Optimization | Base: **0.00%** gain because all three candidates fit; best tested one-factor scenario: **11.21%** expected-value gain |
+| Optimization | Base: **0.00%** gain because all three candidates fit; at a binding 6-hour budget: **7.67%** expected-value gain |
 | Paper-to-code | First-half 2018 property MASE: reproduced SARIMA **0.708** vs ETS 0.785; SARIMA won 4/8 sites, ETS won 4/8 and the aggregate |
 
 Every number above is read from [`artifacts/v1.0.0/metrics.json`](artifacts/v1.0.0/metrics.json); underlying forecasts and decisions are committed as CSV.
@@ -57,7 +57,7 @@ confirmation_weight_i × excess_m3_i × persistence × missed_m3_cost
 
 CP-SAT maximizes the sum of selected values under a technician-hour budget, zone setup time, monthly capacity and per-site limits. Confirmation weights are declared scenario assumptions—not learned probabilities. The baseline simply takes highest standardized residual first.
 
-In the base case all three candidates fit in 8.13 of 12 available hours, so both policies are identical. At a lower missed-volume value (or one-month persistence), the optimizer rejects a negative-value inspection and improves assumed expected value by 11.21%, while capturing less raw excess. That is the correct trade-off under those assumptions, not evidence of realized savings.
+In the base case all three candidates fit in 8.13 of 12 available hours, so both policies are identical. With a binding 6-hour budget, greedy residual ranking chooses one central-zone inspection; CP-SAT instead bundles two east-zone inspections and improves assumed expected value by 7.67%, while covering 129.23 m³ rather than 88.15 m³ of observed excess. This is a measured routing/setup trade-off under declared assumptions, not evidence of realized savings.
 
 ![Optimization sensitivity](artifacts/v1.0.0/figures/optimization-sensitivity.png?v=20260830-helsinki-water-v1)
 
