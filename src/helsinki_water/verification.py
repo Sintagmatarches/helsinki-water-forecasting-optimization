@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import math
 from pathlib import Path
@@ -21,6 +22,9 @@ NUMERIC_ATOL = 1e-9
 INTERVAL_COLUMNS = {"interval_q", "lower_m3", "upper_m3", "interval_width_m3"}
 INTERVAL_RTOL = 1e-12
 INTERVAL_ATOL = 1e-9
+SARIMA_FORECAST_RTOL = 5e-5
+SARIMA_FORECAST_ATOL = 1e-6
+SARIMA_METRIC_RTOL = 1e-6
 IDENTITY_COLUMNS = {
     "split",
     "model",
@@ -36,7 +40,12 @@ IDENTITY_COLUMNS = {
 }
 
 
-def _compare_json(reference: Any, current: Any, path: str = "root") -> None:
+def _compare_json(
+    reference: Any,
+    current: Any,
+    path: str = "root",
+    sarima_context: bool = False,
+) -> None:
     if isinstance(reference, bool) or isinstance(current, bool):
         if reference is not current:
             raise AssertionError(f"Boolean changed at {path}: {reference!r} != {current!r}")
@@ -46,10 +55,11 @@ def _compare_json(reference: Any, current: Any, path: str = "root") -> None:
             raise AssertionError(f"Integer evidence changed at {path}: {reference} != {current}")
         return
     if isinstance(reference, (int, float)) and isinstance(current, (int, float)):
+        relative_tolerance = SARIMA_METRIC_RTOL if sarima_context else NUMERIC_RTOL
         if not math.isclose(
             float(reference),
             float(current),
-            rel_tol=NUMERIC_RTOL,
+            rel_tol=relative_tolerance,
             abs_tol=NUMERIC_ATOL,
         ):
             raise AssertionError(f"Numeric evidence changed at {path}: {reference} != {current}")
@@ -57,14 +67,26 @@ def _compare_json(reference: Any, current: Any, path: str = "root") -> None:
     if isinstance(reference, dict) and isinstance(current, dict):
         if reference.keys() != current.keys():
             raise AssertionError(f"JSON keys changed at {path}")
+        model_is_sarima = (
+            reference.get("model") == "sarima_paper"
+            and current.get("model") == "sarima_paper"
+        )
         for key in reference:
-            _compare_json(reference[key], current[key], f"{path}.{key}")
+            child_sarima_context = (
+                sarima_context or model_is_sarima or "sarima" in str(key).casefold()
+            )
+            _compare_json(
+                reference[key],
+                current[key],
+                f"{path}.{key}",
+                child_sarima_context,
+            )
         return
     if isinstance(reference, list) and isinstance(current, list):
         if len(reference) != len(current):
             raise AssertionError(f"JSON list length changed at {path}")
         for index, (left, right) in enumerate(zip(reference, current, strict=True)):
-            _compare_json(left, right, f"{path}[{index}]")
+            _compare_json(left, right, f"{path}[{index}]", sarima_context)
         return
     if reference != current:
         raise AssertionError(f"Evidence changed at {path}: {reference!r} != {current!r}")
@@ -80,15 +102,44 @@ def _compare_csv(reference_path: Path, current_path: Path) -> None:
     for column in reference.columns:
         left = reference[column]
         right = current[column]
+        if column == "model_details":
+            sarima_rows = reference["model"].eq("sarima_paper")
+            if not left.loc[~sarima_rows].fillna("<NA>").astype(str).equals(
+                right.loc[~sarima_rows].fillna("<NA>").astype(str)
+            ):
+                raise AssertionError(f"Model details changed: {current_path.name}:{column}")
+            for index in reference.index[sarima_rows]:
+                reference_details = ast.literal_eval(str(left.loc[index]))
+                current_details = ast.literal_eval(str(right.loc[index]))
+                _compare_json(
+                    reference_details,
+                    current_details,
+                    f"{current_path.name}.{column}[{index}]",
+                )
+            continue
         if column in IDENTITY_COLUMNS or not pd.api.types.is_numeric_dtype(left):
             if not left.fillna("<NA>").astype(str).equals(right.fillna("<NA>").astype(str)):
                 raise AssertionError(f"Identity column changed: {current_path.name}:{column}")
             continue
         relative_tolerance = INTERVAL_RTOL if column in INTERVAL_COLUMNS else NUMERIC_RTOL
         absolute_tolerance = INTERVAL_ATOL if column in INTERVAL_COLUMNS else NUMERIC_ATOL
+        strict_rows = np.ones(len(reference), dtype=bool)
+        if column == "forecast_m3" and "model" in reference:
+            sarima_mask = reference["model"].eq("sarima_paper").to_numpy()
+            strict_rows &= ~sarima_mask
+            if not np.allclose(
+                left.to_numpy(dtype=float)[sarima_mask],
+                right.to_numpy(dtype=float)[sarima_mask],
+                rtol=SARIMA_FORECAST_RTOL,
+                atol=SARIMA_FORECAST_ATOL,
+                equal_nan=True,
+            ):
+                raise AssertionError(
+                    f"SARIMA forecast column changed: {current_path.name}:{column}"
+                )
         if not np.allclose(
-            left.to_numpy(dtype=float),
-            right.to_numpy(dtype=float),
+            left.to_numpy(dtype=float)[strict_rows],
+            right.to_numpy(dtype=float)[strict_rows],
             rtol=relative_tolerance,
             atol=absolute_tolerance,
             equal_nan=True,

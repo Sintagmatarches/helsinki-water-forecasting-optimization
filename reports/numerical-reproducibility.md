@@ -44,6 +44,10 @@ Model-by-model comparison of 486 stored forecasts isolated the drift:
 
 The cause was `statsmodels` Holt–Winters parameter optimization, whose numerical search followed different paths across the Windows and Linux numerical stacks. The uncertainty layer correctly propagated those different forecast residuals; changing quantile interpolation or widening interval tolerance would have masked the upstream model-fitting instability.
 
+After replacing that optimizer, run `33370355865` confirmed that ETS, interval, anomaly and optimization artifacts no longer moved. The newly strict verifier then exposed a separate, much smaller variation in the paper-reproduction SARIMA maximum-likelihood fit: 481 SARIMA forecasts changed, with maximum absolute difference 0.00173864 m³ and maximum relative difference 0.003012%. Forty-two SARIMA-derived JSON metrics changed; their maxima were 0.0000118493 m³ absolute and 0.00004185% relative. Serialized SARIMA AIC changed by at most 0.0000001551, or 2.75×10⁻⁸%. Harmonic Ridge had 45 nonzero differences no larger than 1.14×10⁻¹³ m³; naïve and deterministic ETS were exact.
+
+The SARIMA method deliberately retains `statsmodels` maximum-likelihood estimation because optimizer-based SARIMA fitting is the algorithm reproduced from the paper. Replacing it with a different finite-grid estimator would change the scientific reproduction rather than fix the original interval instability. Its remaining sub-millilitre forecast variation is therefore measured numerical-platform behavior and is isolated in verification policy rather than rounded away.
+
 ## Production fix
 
 `ets` remains an additive-error, damped-additive-trend, additive-seasonal ETS model. Its coefficients are now selected by a declared finite grid:
@@ -60,9 +64,12 @@ The conformal order statistic now explicitly uses a stable sort and documents th
 ## Verification policy after the fix
 
 - JSON schema, strings, booleans and integer evidence: exact.
-- CSV schema, row count and identity/non-numeric columns, including model details: exact.
+- CSV schema, row count and identity/non-numeric columns: exact. SARIMA model-detail structure and orders are exact; its AIC is parsed and compared numerically.
 - `interval_q`, `lower_m3`, `upper_m3`, `interval_width_m3`: `rtol=1e-12`, `atol=1e-9 m³`.
-- Other numeric evidence: `rtol=1e-9`, `atol=1e-9`.
+- Ordinary numeric evidence: `rtol=1e-9`, `atol=1e-9`.
+- Paper-SARIMA raw forecasts only: `rtol=5e-5`, `atol=1e-6 m³`; measured worst case was `3.012e-5` relative.
+- Paper-SARIMA-derived JSON metrics only: `rtol=1e-6`, `atol=1e-9`; measured worst case was `4.185e-7` relative.
+- SARIMA model identity and selected `(p,d,q)(P,D,Q)12` orders remain exact; AIC is parsed and compared numerically at the ordinary `1e-9` policy.
 - PNG byte equality is not required because font rasterization is platform-specific; expected files and minimum valid sizes are checked.
 
 This policy is substantially stricter than the rejected 5% / 0.5 m³ global tolerance and is scoped to the actual numerical contracts.

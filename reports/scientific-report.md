@@ -158,9 +158,9 @@ This is a mixed method reproduction, not an exact replication or a universal ran
 
 - `src/` package layout, typed modules and CLI.
 - Deterministic seeds and declared candidate grid.
-- Automated validation and 11 regression/unit tests.
+- Automated validation and 13 regression/unit tests.
 - Ruff and strict mypy in CI.
-- GitHub Actions reruns metrics and figures, enforces exact artifact structure and identity fields, and checks interval numerics at `rtol=1e-12` / `atol=1e-9 m³` after replacing the platform-dependent ETS optimizer.
+- GitHub Actions reruns metrics and figures, enforces exact artifact structure and identity fields, and checks interval numerics at `rtol=1e-12` / `atol=1e-9 m³` after replacing the platform-dependent ETS optimizer. A separate measured policy applies only to paper-SARIMA optimizer outputs.
 - Versioned JSON, CSV and PNG outputs.
 - Raw responses, environments, caches and secrets excluded from git.
 - No credentials or manual access required.

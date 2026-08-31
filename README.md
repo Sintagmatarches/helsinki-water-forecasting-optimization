@@ -86,7 +86,7 @@ mypy src
 - [`artifacts/v1.0.0/`](artifacts/v1.0.0/) — machine-readable metrics, predictions, anomalies, scenarios and figures
 - [`src/helsinki_water/`](src/helsinki_water/) — acquisition, validation, models, uncertainty and optimization package
 
-Dependency versions are pinned. The ETS implementation uses a declared grid and sequential IEEE-754 arithmetic rather than a platform optimizer. CI checks interval columns at `rtol=1e-12`, `atol=1e-9 m³`, all other numeric evidence at `1e-9`, and identities exactly; only PNG bytes are exempt because font rendering differs by operating system.
+Dependency versions are pinned. The ETS implementation uses a declared grid and sequential IEEE-754 arithmetic rather than a platform optimizer. CI checks interval columns at `rtol=1e-12`, `atol=1e-9 m³`, identities exactly, and ordinary numeric evidence at `1e-9`. Only paper-SARIMA optimizer outputs use measured, scoped bounds (`5e-5` for raw forecasts; `1e-6` for derived metrics); PNG bytes are exempt because font rendering differs by operating system.
 
 ## What this project proves—and does not
 
