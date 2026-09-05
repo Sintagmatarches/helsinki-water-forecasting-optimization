@@ -102,7 +102,8 @@ def optimize(candidates: pd.DataFrame, assumptions: DecisionAssumptions) -> dict
             "optimized": empty,
             "improvementPct": 0.0,
         }
-    work = candidates.copy()
+    # Solver variables are positional; caller DataFrame labels need not be.
+    work = candidates.reset_index(drop=True).copy()
     work["decision_value"] = _value(work, assumptions)
     scale = 100
     model = cp_model.CpModel()
