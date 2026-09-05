@@ -9,3 +9,18 @@ dist/
 build/
 *.egg-info/
 
+# Environment-only credentials and local service state.
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+*.pem
+*.key
+*.tfvars
+*.tfvars.json
+*.tfstate
+*.tfstate.*
+mlruns/
+mlflow.db
+mlflow.db-*
