@@ -49,3 +49,19 @@ def test_missing_month_and_nonpositive_value_fail() -> None:
     invalid.loc[1, "water_m3"] = 0.0
     with pytest.raises(DataValidationError, match="strictly positive"):
         validate_water_data(invalid, config())
+
+
+@pytest.mark.parametrize("value", [float("inf"), -float("inf"), float("nan")])
+def test_nonfinite_water_is_rejected(value: float) -> None:
+    invalid = frame()
+    invalid.loc[1, "water_m3"] = value
+    with pytest.raises(DataValidationError, match="finite numeric"):
+        validate_water_data(invalid, config())
+
+
+@pytest.mark.parametrize("value", ["2.0", "invalid", True, 1 + 2j])
+def test_nonnumeric_water_dtype_is_rejected(value: object) -> None:
+    invalid = frame().astype({"water_m3": object})
+    invalid.loc[1, "water_m3"] = value
+    with pytest.raises(DataValidationError, match="finite numeric"):
+        validate_water_data(invalid, config())

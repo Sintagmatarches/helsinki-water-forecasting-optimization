@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import numpy as np
 import pandas as pd
+from pandas.api.types import is_bool_dtype, is_complex_dtype, is_numeric_dtype
 
 from .config import ExperimentConfig
 
@@ -25,9 +27,13 @@ def validate_water_data(data: pd.DataFrame, config: ExperimentConfig) -> dict[st
         if not actual.equals(expected):
             absent = expected.difference(actual)
             raise DataValidationError(f"{name} has missing or extra months: {list(absent)}")
+    water = data["water_m3"]
     if (
-        data["water_m3"].isna().any()
-        or (~pd.to_numeric(data["water_m3"], errors="coerce").notna()).any()
+        not is_numeric_dtype(water)
+        or is_bool_dtype(water)
+        or is_complex_dtype(water)
+        or water.isna().any()
+        or not np.isfinite(water.to_numpy(dtype=float)).all()
     ):
         raise DataValidationError("Water values must be finite numeric values")
     if (data["water_m3"] <= 0).any():

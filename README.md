@@ -23,7 +23,7 @@ The scope is deliberately precise: this is municipal-property consumption, not t
 
 Every number above is read from [`artifacts/v1.0.0/metrics.json`](artifacts/v1.0.0/metrics.json); underlying forecasts and decisions are committed as CSV.
 
-![Forecast benchmark](artifacts/v1.0.0/figures/forecast-benchmark.png?v=20260831-deterministic-ets-v2)
+![Forecast benchmark](artifacts/v1.0.0/figures/forecast-benchmark.png?v=20260905-validation-v1)
 
 ## What was built
 
@@ -37,7 +37,7 @@ Every number above is read from [`artifacts/v1.0.0/metrics.json`](artifacts/v1.0
 - One-factor sensitivity analysis that shows when optimization helps and, more importantly here, when it does not.
 - Independent method reproduction of Ristow, Henning & Kalbusch (2021), with setup differences and failed assumptions documented.
 
-![Sealed aggregate forecast](artifacts/v1.0.0/figures/aggregate-holdout.png?v=20260831-deterministic-ets-v2)
+![Sealed aggregate forecast](artifacts/v1.0.0/figures/aggregate-holdout.png?v=20260905-validation-v1)
 
 ## Data decision
 
@@ -59,7 +59,7 @@ CP-SAT maximizes the sum of selected values under a technician-hour budget, zone
 
 In the base case all three candidates fit in 8.13 of 12 available hours, so both policies are identical. With a binding 8-hour budget, greedy residual ranking chooses Suutarila and Tammisalo; CP-SAT replaces Tammisalo with the higher-value Kontula candidate and improves assumed expected value by 14.59%, while covering 156.97 m³ rather than 134.32 m³ of observed excess. This is a measured decision trade-off under declared assumptions, not evidence of realized savings.
 
-![Optimization sensitivity](artifacts/v1.0.0/figures/optimization-sensitivity.png?v=20260831-deterministic-ets-v2)
+![Optimization sensitivity](artifacts/v1.0.0/figures/optimization-sensitivity.png?v=20260905-validation-v1)
 
 ## Reproduce
 
@@ -75,7 +75,7 @@ ruff check .
 mypy src
 ```
 
-`python -m helsinki_water.cli run` uses the committed curated snapshot, so result reproduction does not depend on the live API remaining unchanged. `acquire` intentionally refreshes the source and must pass the same validation contract.
+`python -m helsinki_water.cli run` uses the committed curated snapshot, so result reproduction does not depend on the live API remaining unchanged. `acquire` intentionally refreshes the source and validates the complete panel and finite positive numeric consumption before replacing curated data or their manifest. A rejected panel leaves the existing curated evidence intact.
 
 ## Read the evidence
 

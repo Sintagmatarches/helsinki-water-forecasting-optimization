@@ -11,6 +11,7 @@ from urllib.request import Request, urlopen
 import pandas as pd
 
 from .config import ROOT, ExperimentConfig
+from .validation import validate_water_data
 
 API_ROOT = "https://helsinki-openapi.nuuka.cloud/api/v1.0"
 HRI_DATASET_URL = (
@@ -101,6 +102,9 @@ def acquire(config: ExperimentConfig) -> tuple[Path, Path, Path]:
             }
         )
     metadata = pd.DataFrame(metadata_rows).sort_values("property_name")
+
+    # Gate source refreshes before replacing the reproducible curated snapshot.
+    validate_water_data(frame, config)
 
     data_path = processed_dir / "water_monthly_v1.csv"
     metadata_path = processed_dir / "properties_v1.csv"
