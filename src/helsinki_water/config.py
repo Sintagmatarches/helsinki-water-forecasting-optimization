@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import math
+import re
 import tomllib
 from dataclasses import dataclass
 from pathlib import Path
@@ -23,6 +25,34 @@ class ExperimentConfig:
     interval_alpha: float
     properties: tuple[str, ...]
     optimization: dict[str, float | int]
+
+    def __post_init__(self) -> None:
+        """Reject unsafe split designs before acquisition or expensive fitting."""
+        def month(value: str) -> int:
+            if not re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])", value):
+                raise ValueError(f"Invalid ISO month: {value}")
+            return int(value[:4]) * 12 + int(value[5:]) - 1
+
+        start, end = month(self.start_month), month(self.end_month)
+        first, last = month(self.development_first_origin), month(self.development_last_origin)
+        final = month(self.final_origin)
+        for name in ("development_step_months", "development_horizon", "final_horizon"):
+            if getattr(self, name) <= 0:
+                raise ValueError(f"{name} must be positive")
+        if not start <= first <= last < final < end:
+            raise ValueError("Origins must be ordered within the observed data window")
+        if last + self.development_horizon > final:
+            raise ValueError("Development targets overlap the sealed final holdout")
+        if final + self.final_horizon > end:
+            raise ValueError("Final targets extend beyond observed data")
+        if not math.isfinite(self.interval_alpha) or not 0 < self.interval_alpha < 1:
+            raise ValueError("interval_alpha must be finite and strictly between zero and one")
+        if not self.properties or len(set(self.properties)) != len(self.properties):
+            raise ValueError("Properties must be nonempty and unique")
+        if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*", self.version):
+            raise ValueError("version must be a safe artifact directory name")
+        if any(not math.isfinite(value) or value < 0 for value in self.optimization.values()):
+            raise ValueError("Optimization assumptions must be finite and nonnegative")
 
 
 def load_config(path: Path | None = None) -> ExperimentConfig:

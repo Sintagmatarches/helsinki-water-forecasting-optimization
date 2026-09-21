@@ -23,12 +23,13 @@ The scope is deliberately precise: this is municipal-property consumption, not t
 
 Every number above is read from [`artifacts/v1.0.0/metrics.json`](artifacts/v1.0.0/metrics.json); underlying forecasts and decisions are committed as CSV.
 
-![Forecast benchmark](artifacts/v1.0.0/figures/forecast-benchmark.png?v=20260905-validation-v1)
+![Forecast benchmark](artifacts/v1.0.0/figures/forecast-benchmark.png?v=20260921-config-contract-v1)
 
 ## What was built
 
 - Reproducible acquisition from the City of Helsinki Nuuka Open API, with ignored raw responses, committed curated data and SHA-256 provenance.
 - Strict complete-panel validation before modeling.
+- A typed, versioned configuration boundary that rejects invalid month ranges, development/final overlap, unsafe artifact versions and infeasible optimization values before any experiment runs.
 - Seasonal naïve, deterministic grid-fitted additive damped ETS, independently implemented AIC-selected SARIMA and harmonic Ridge approaches.
 - Chronological development backtests and a sealed 2018 test year; no future-derived features or retrospective model switch.
 - Scale-normalized conformal intervals calibrated only from development residuals and evaluated by horizon, season and high demand.
@@ -37,7 +38,7 @@ Every number above is read from [`artifacts/v1.0.0/metrics.json`](artifacts/v1.0
 - One-factor sensitivity analysis that shows when optimization helps and, more importantly here, when it does not.
 - Independent method reproduction of Ristow, Henning & Kalbusch (2021), with setup differences and failed assumptions documented.
 
-![Sealed aggregate forecast](artifacts/v1.0.0/figures/aggregate-holdout.png?v=20260905-validation-v1)
+![Sealed aggregate forecast](artifacts/v1.0.0/figures/aggregate-holdout.png?v=20260921-config-contract-v1)
 
 ## Data decision
 
@@ -59,7 +60,7 @@ CP-SAT maximizes the sum of selected values under a technician-hour budget, zone
 
 In the base case all three candidates fit in 8.13 of 12 available hours, so both policies are identical. With a binding 8-hour budget, greedy residual ranking chooses Suutarila and Tammisalo; CP-SAT replaces Tammisalo with the higher-value Kontula candidate and improves assumed expected value by 14.59%, while covering 156.97 m³ rather than 134.32 m³ of observed excess. This is a measured decision trade-off under declared assumptions, not evidence of realized savings.
 
-![Optimization sensitivity](artifacts/v1.0.0/figures/optimization-sensitivity.png?v=20260905-validation-v1)
+![Optimization sensitivity](artifacts/v1.0.0/figures/optimization-sensitivity.png?v=20260921-config-contract-v1)
 
 ## Reproduce
 
@@ -83,6 +84,7 @@ mypy src
 - [`reports/feasibility-audit.md`](reports/feasibility-audit.md) — official-source audit and data boundary
 - [`reports/paper-reproduction.md`](reports/paper-reproduction.md) — exact paper, reproduced method and non-equivalences
 - [`reports/numerical-reproducibility.md`](reports/numerical-reproducibility.md) — measured Windows/Linux drift, root cause and strict verification contract
+- [`reports/configuration-contract.md`](reports/configuration-contract.md) — versioned pipeline configuration invariants and failure boundary
 - [`artifacts/v1.0.0/`](artifacts/v1.0.0/) — machine-readable metrics, predictions, anomalies, scenarios and figures
 - [`src/helsinki_water/`](src/helsinki_water/) — acquisition, validation, models, uncertainty and optimization package
 
